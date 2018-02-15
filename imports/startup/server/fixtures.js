@@ -8,7 +8,7 @@ Meteor.startup(() => {
   if (Links.find().count() === 0) {
     const data = [
       {
-        title: 'Do the Tutorial 2',
+        title: 'Do the Tutorial',
         url: 'https://www.meteor.com/try',
         createdAt: new Date(),
       },

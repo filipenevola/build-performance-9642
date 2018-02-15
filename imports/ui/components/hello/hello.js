@@ -14,6 +14,6 @@ Template.hello.helpers({
 Template.hello.events({
   'click button'(event, instance) {
     // increment the counter when button is clicked
-    instance.counter.set(instance.counter.get() + 1);
+    instance.counter.set(instance.counter.get() + 2);
   },
 });
