@@ -3,6 +3,7 @@
   "private": true,
   "scripts": {
     "start": "meteor run",
+    "start-profile": "METEOR_PROFILE=1 meteor run",
     "test": "meteor test --once --driver-package meteortesting:mocha"
   },
   "dependencies": {
