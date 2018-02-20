@@ -2,6 +2,7 @@
 
 - [issue](https://github.com/meteor/meteor/issues/9642)
 - [report](https://gist.github.com/Gywem/f8fd9a4b3207359eb7970c2cad1d689e)
+- [profile logs](https://github.com/filipenevola/build-performance-9642/tree/master/private)
 
 We think Meteor build tool start to be slow when it has to take care of a lot of files, more than 1,000.
 
@@ -29,6 +30,6 @@ meteor reset
 meteor npm install
 ```  
 
-See in the profile logs with a lot of files how Meteor build/rebuild becomes very slow.
+See in the [profile logs](https://github.com/filipenevola/build-performance-9642/tree/master/private) with a lot of files how Meteor build/rebuild becomes very slow.
 
 Note that we have only simple files with a single empty function but in our real application with have real files that will take longer to be parsed, create the hash, etc
