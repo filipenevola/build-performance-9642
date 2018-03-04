@@ -8,5 +8,5 @@ Package.onUse((api) => {
 
   api.use('ecmascript');
 
-  api.addFiles('index.js', ['client', 'server']);
+  api.addFiles('index.js', ['client']);
 });
