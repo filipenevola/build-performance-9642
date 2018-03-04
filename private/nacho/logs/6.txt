@@ -1,0 +1,275 @@
+| (#8) Profiling: ProjectContext prepareProjectForBuild
+For compatibility, the PACKAGE_DIRS environment variable is deprecated and will be removed in a future Meteor release.
+Developers should now use METEOR_PACKAGE_DIRS and Windows projects should now use a semi-colon (;) to separate paths.
+|  Preparing to build package a              \
+| ProjectContext prepareProjectForBuild.........................1,463 ms (1)
+| ├─ _initializeCatalog............................................19 ms (1)
+| │  └─ LocalCatalog#initialize....................................18 ms (1)
+| │     ├─ addPatternsToList                                        4 ms (2)
+| │     ├─ LocalCatalog#_computeEffectiveLocalPackages.............11 ms (1)
+| │     │  └─ optimistic hashOrNull................................10 ms (25)
+| │     │     ├─ optimistic readFile                                1 ms (21)
+| │     │     └─ other optimistic hashOrNull                        8 ms
+| │     └─ LocalCatalog#_loadLocalPackages..........................4 ms (1)
+| │        └─ PackageSource#initFromPackageDir......................3 ms (4)
+| │           └─ sqlite query                                       2 ms (4)
+| ├─ _resolveConstraints...........................................35 ms (1)
+| │  ├─ Select Package Versions....................................10 ms (1)
+| │  │  └─ new CS.Input                                            10 ms (1)
+| │  └─ other _resolveConstraints                                  24 ms
+| ├─ _downloadMissingPackages......................................30 ms (1)
+| │  ├─ Isopack.readMetadataFromDirectory...........................5 ms (84)
+| │  │  ├─ files.stat                                               1 ms (84)
+| │  │  ├─ files.readFile                                           2 ms (84)
+| │  │  └─ other Isopack.readMetadataFromDirectory                  2 ms
+| │  └─ other _downloadMissingPackages                             24 ms
+| └─ _buildLocalPackages........................................1,379 ms (1)
+|    ├─ IsopackCache Load local isopack                             1 ms (84)
+|    ├─ IsopackCache Build local isopack........................1,376 ms (2)
+|    │  ├─ Isopack#getMergedWatchSet                                1 ms (4)
+|    │  ├─ watch.isUpToDate                                         1 ms (3)
+|    │  ├─ compiler.compile(a)....................................137 ms (1)
+|    │  │  └─ files.withCache.....................................137 ms (2)
+|    │  │     └─ compileUnibuild (a)..............................137 ms (2)
+|    │  │        ├─ files.withCache................................73 ms (2)
+|    │  │        │  ├─ files.readdir                               13 ms (8)
+|    │  │        │  ├─ files.stat                                  15 ms (2008)
+|    │  │        │  └─ other files.withCache                       44 ms
+|    │  │        ├─ optimistic readFile                            17 ms (2004)
+|    │  │        ├─ optimistic hashOrNull                           9 ms (2004)
+|    │  │        └─ other compileUnibuild (a)                      37 ms
+|    │  ├─ Isopack#saveToPath.....................................725 ms (1)
+|    │  │  ├─ Builder#write.......................................435 ms (2005)
+|    │  │  │  ├─ Builder#_ensureDirectory                          23 ms (2005)
+|    │  │  │  ├─ sha1                                              13 ms (2005)
+|    │  │  │  ├─ files.writeFile                                  199 ms (2005)
+|    │  │  │  ├─ files.rename                                     138 ms (2005)
+|    │  │  │  └─ other Builder#write                               62 ms
+|    │  │  ├─ files.writeFile                                       3 ms (4)
+|    │  │  ├─ Builder#complete....................................208 ms (1)
+|    │  │  │  └─ files.renameDirAlmostAtomically..................208 ms (1)
+|    │  │  │     └─ files.rm_recursive                            207 ms (1)
+|    │  │  └─ other Isopack#saveToPath                             79 ms
+|    │  └─ other IsopackCache Build local isopack                 509 ms
+|    └─ other _buildLocalPackages                                   3 ms
+| 
+| Top leaves:
+| other IsopackCache Build local isopack.....................509 ms (2)
+| files.rm_recursive.........................................208 ms (3)
+| files.writeFile............................................202 ms (2010)
+| files.rename...............................................138 ms (2013)
+| 
+| (#8) Total: 1,463 ms (ProjectContext prepareProjectForBuild)
+| 
+| (#9) Profiling: Rebuild App a              \
+|                                            -
+| Rebuild App...................................................3,536 ms (1)
+| └─ files.withCache............................................3,536 ms (1)
+|    ├─ compiler.compile(the app)...............................1,403 ms (1)
+|    │  └─ files.withCache......................................1,403 ms (2)
+|    │     └─ compileUnibuild (the app).........................1,403 ms (2)
+|    │        ├─ files.withCache..................................212 ms (2)
+|    │        │  ├─ files.realpath                                  2 ms (39)
+|    │        │  ├─ files.readdir                                  18 ms (78)
+|    │        │  ├─ files.stat                                     34 ms (5063)
+|    │        │  └─ other files.withCache                         158 ms
+|    │        ├─ optimistic readFile                               25 ms (10045)
+|    │        ├─ optimistic hashOrNull                             12 ms (10045)
+|    │        └─ other compileUnibuild (the app)                1,152 ms
+|    ├─ bundler.bundle..makeClientTarget..........................991 ms (1)
+|    │  └─ Target#make............................................991 ms (1)
+|    │     ├─ Isopack#getUnibuildAtArch                             1 ms (842)
+|    │     ├─ Target#_runCompilerPlugins..........................773 ms (1)
+|    │     │  ├─ sha1                                               1 ms (98)
+|    │     │  ├─ Isopack#getUnibuildAtArch                          1 ms (819)
+|    │     │  ├─ plugin ecmascript................................747 ms (1)
+|    │     │  │  ├─ optimistic statOrNull                          35 ms (34328)
+|    │     │  │  ├─ Babel.compile                                 119 ms (6112)
+|    │     │  │  ├─ sha1                                           24 ms (6113)
+|    │     │  │  └─ other plugin ecmascript                       567 ms
+|    │     │  ├─ plugin templating-compiler                         1 ms (1)
+|    │     │  └─ other Target#_runCompilerPlugins                  22 ms
+|    │     ├─ Target#_emitResources...............................188 ms (1)
+|    │     │  ├─ PackageSourceBatch.computeJsOutputFilesMap.......174 ms (1)
+|    │     │  │  ├─ ImportScanner#_getAbsModuleId                  34 ms (6528)
+|    │     │  │  ├─ ImportScanner#_findImportedModuleIdentifiers    3 ms (6437)
+|    │     │  │  ├─ ImportScanner#_readFile                         2 ms (342)
+|    │     │  │  └─ other PackageSourceBatch.computeJsOutputFilesMap 135 ms
+|    │     │  ├─ PackageSourceBatch#getResources...................11 ms (68)
+|    │     │  │  └─ PackageSourceBatch#_linkJS.....................10 ms (68)
+|    │     │  │     ├─ sha1                                         3 ms (136)
+|    │     │  │     └─ other PackageSourceBatch#_linkJS             7 ms
+|    │     │  └─ other Target#_emitResources                        3 ms
+|    │     ├─ Target#minifyJs                                      15 ms (1)
+|    │     ├─ Target#rewriteSourceMaps                              1 ms (1)
+|    │     ├─ sha1                                                  8 ms (140)
+|    │     └─ other Target#make                                     3 ms
+|    ├─ bundler.bundle..makeServerTarget..........................987 ms (1)
+|    │  └─ Target#make............................................987 ms (1)
+|    │     ├─ Isopack#getUnibuildAtArch                             1 ms (969)
+|    │     ├─ Target#_runCompilerPlugins..........................876 ms (1)
+|    │     │  ├─ sha1                                               1 ms (98)
+|    │     │  ├─ Isopack#getUnibuildAtArch                         10 ms (963)
+|    │     │  ├─ plugin ecmascript................................855 ms (1)
+|    │     │  │  ├─ optimistic statOrNull                          49 ms (34386)
+|    │     │  │  ├─ Babel.compile                                 103 ms (6132)
+|    │     │  │  ├─ sha1                                           17 ms (6133)
+|    │     │  │  └─ other plugin ecmascript                       686 ms
+|    │     │  └─ other Target#_runCompilerPlugins                  10 ms
+|    │     ├─ Target#_emitResources...............................108 ms (1)
+|    │     │  ├─ PackageSourceBatch.computeJsOutputFilesMap........96 ms (1)
+|    │     │  │  ├─ ImportScanner#_getAbsModuleId                  34 ms (6206)
+|    │     │  │  └─ other PackageSourceBatch.computeJsOutputFilesMap 62 ms
+|    │     │  ├─ PackageSourceBatch#getResources....................2 ms (74)
+|    │     │  │  └─ PackageSourceBatch#_linkJS                      2 ms (74)
+|    │     │  └─ other Target#_emitResources                        9 ms
+|    │     └─ other Target#make                                     3 ms
+|    ├─ bundler writeSiteArchive..................................144 ms (1)
+|    │  ├─ bundler writeTargetToPath..............................140 ms (2)
+|    │  │  ├─ ClientTarget#write...................................24 ms (1)
+|    │  │  │  ├─ Builder#write......................................3 ms (25)
+|    │  │  │  │  └─ sha1                                            2 ms (25)
+|    │  │  │  └─ other ClientTarget#write                          21 ms
+|    │  │  └─ ServerTarget#write..................................115 ms (1)
+|    │  │     ├─ Builder#write                                      1 ms (12)
+|    │  │     └─ JsImage#write....................................113 ms (1)
+|    │  │        ├─ Builder#write...................................6 ms (117)
+|    │  │        │  └─ sha1                                         5 ms (117)
+|    │  │        ├─ sha1                                            1 ms (40)
+|    │  │        ├─ meteorNpm.isPortable...........................51 ms (23)
+|    │  │        │  ├─ meteorNpm.isPortable........................47 ms (580)
+|    │  │        │  │  ├─ optimistic lstat                          2 ms (580)
+|    │  │        │  │  ├─ optimistic statOrNull                     1 ms (580)
+|    │  │        │  │  ├─ optimistic readJsonOrNull................32 ms (578)
+|    │  │        │  │  │  ├─ optimistic readFile...................17 ms (578)
+|    │  │        │  │  │  │  ├─ files.readFile                     11 ms (578)
+|    │  │        │  │  │  │  └─ other optimistic readFile           6 ms
+|    │  │        │  │  │  └─ other optimistic readJsonOrNull       15 ms
+|    │  │        │  │  ├─ meteorNpm.isPortable......................5 ms (64)
+|    │  │        │  │  │  ├─ optimistic readJsonOrNull..............3 ms (64)
+|    │  │        │  │  │  │  └─ optimistic readFile.................2 ms (64)
+|    │  │        │  │  │  │     └─ files.readFile                   1 ms (64)
+|    │  │        │  │  │  └─ other meteorNpm.isPortable             2 ms
+|    │  │        │  │  └─ other meteorNpm.isPortable                6 ms
+|    │  │        │  └─ other meteorNpm.isPortable                   4 ms
+|    │  │        ├─ Builder#copyDirectory..........................25 ms (23)
+|    │  │        │  ├─ files.realpath                               1 ms (23)
+|    │  │        │  ├─ files.symlink                                6 ms (184)
+|    │  │        │  ├─ files.rm_recursive                          13 ms (92)
+|    │  │        │  └─ other Builder#copyDirectory                  3 ms
+|    │  │        └─ other JsImage#write                            30 ms
+|    │  └─ other bundler writeSiteArchive                           3 ms
+|    └─ other files.withCache                                      10 ms
+| 
+| Top leaves:
+| other plugin ecmascript..................................1,254 ms (2)
+| other compileUnibuild (the app)..........................1,152 ms (2)
+| Babel.compile..............................................222 ms (12244)
+| other PackageSourceBatch.computeJsOutputFilesMap...........196 ms (2)
+| other files.withCache......................................169 ms (5)
+| 
+| (#9) Total: 3,536 ms (Rebuild App)
+| 
+I20180304-16:47:59.151(1)? | (#1) Profiling: Server startup
+I20180304-16:47:59.152(1)? | 
+I20180304-16:47:59.152(1)? | Server startup..................................................590 ms (1)
+I20180304-16:47:59.152(1)? | ├─ Load server bundles..........................................579 ms (1)
+I20180304-16:47:59.152(1)? | │  ├─ packages/meteor.js..........................................3 ms (1)
+I20180304-16:47:59.152(1)? | │  │  ├─ Npm.require("meteor-deque")                              1 ms (1)
+I20180304-16:47:59.152(1)? | │  │  └─ other packages/meteor.js                                 1 ms
+I20180304-16:47:59.152(1)? | │  ├─ packages/npm-mongo.js......................................71 ms (1)
+I20180304-16:47:59.153(1)? | │  │  └─ Npm.require("mongodb")                                  71 ms (1)
+I20180304-16:47:59.153(1)? | │  ├─ packages/modules.js.........................................6 ms (1)
+I20180304-16:47:59.153(1)? | │  │  └─ require("/node_modules/meteor/modules/server.js")........5 ms (1)
+I20180304-16:47:59.153(1)? | │  │     └─ require("./reify.js").................................4 ms (1)
+I20180304-16:47:59.153(1)? | │  │        └─ require("reify/lib/runtime")                       3 ms (1)
+I20180304-16:47:59.153(1)? | │  ├─ packages/ecmascript-runtime-server.js.......................6 ms (1)
+I20180304-16:47:59.153(1)? | │  │  └─ require("/node_modules/meteor/ecmascript-runtime-server/runtime.js").6 ms (1)
+I20180304-16:47:59.153(1)? | │  │     └─ require("core-js/modules/es7.string.pad-start")       5 ms (1)
+I20180304-16:47:59.154(1)? | │  ├─ packages/babel-compiler.js..................................2 ms (1)
+I20180304-16:47:59.154(1)? | │  │  └─ Npm.require("semver")                                    2 ms (1)
+I20180304-16:47:59.154(1)? | │  ├─ packages/babel-runtime.js...................................1 ms (1)
+I20180304-16:47:59.154(1)? | │  │  └─ require("/node_modules/meteor/babel-runtime/babel-runtime.js") 1 ms (1)
+I20180304-16:47:59.154(1)? | │  ├─ packages/promise.js.........................................2 ms (1)
+I20180304-16:47:59.154(1)? | │  │  └─ require("/node_modules/meteor/promise/server.js")........2 ms (1)
+I20180304-16:47:59.154(1)? | │  │     └─ require("meteor-promise")                             1 ms (1)
+I20180304-16:47:59.154(1)? | │  ├─ packages/http.js...........................................99 ms (1)
+I20180304-16:47:59.154(1)? | │  │  └─ require("/node_modules/meteor/http/httpcall_server.js").99 ms (1)
+I20180304-16:47:59.154(1)? | │  │     └─ require("request")                                   98 ms (1)
+I20180304-16:47:59.154(1)? | │  ├─ packages/dynamic-import.js..................................3 ms (1)
+I20180304-16:47:59.155(1)? | │  │  └─ require("/node_modules/meteor/dynamic-import/server.js").3 ms (1)
+I20180304-16:47:59.155(1)? | │  │     └─ require("./security.js")                              2 ms (1)
+I20180304-16:47:59.155(1)? | │  ├─ packages/random.js..........................................2 ms (1)
+I20180304-16:47:59.155(1)? | │  │  └─ require("/node_modules/meteor/random/random.js")         2 ms (1)
+I20180304-16:47:59.155(1)? | │  ├─ packages/minimongo.js.......................................6 ms (1)
+I20180304-16:47:59.155(1)? | │  │  └─ require("/node_modules/meteor/minimongo/minimongo_server.js").6 ms (1)
+I20180304-16:47:59.155(1)? | │  │     └─ require("./minimongo_common.js")......................5 ms (1)
+I20180304-16:47:59.155(1)? | │  │        └─ require("./local_collection.js")...................4 ms (1)
+I20180304-16:47:59.155(1)? | │  │           ├─ require("./cursor.js")..........................2 ms (1)
+I20180304-16:47:59.156(1)? | │  │           │  └─ require("./common.js")                       1 ms (1)
+I20180304-16:47:59.156(1)? | │  │           └─ other require("./local_collection.js")          2 ms
+I20180304-16:47:59.156(1)? | │  ├─ packages/ddp-client.js......................................7 ms (1)
+I20180304-16:47:59.156(1)? | │  │  └─ require("/node_modules/meteor/ddp-client/server/server.js").6 ms (1)
+I20180304-16:47:59.156(1)? | │  │     └─ require("../common/namespace.js").....................6 ms (1)
+I20180304-16:47:59.156(1)? | │  │        ├─ require("./livedata_connection.js")                3 ms (1)
+I20180304-16:47:59.156(1)? | │  │        └─ other require("../common/namespace.js")            3 ms
+I20180304-16:47:59.156(1)? | │  ├─ packages/boilerplate-generator.js..........................58 ms (1)
+I20180304-16:47:59.156(1)? | │  │  └─ require("/node_modules/meteor/boilerplate-generator/generator.js").58 ms (1)
+I20180304-16:47:59.156(1)? | │  │     └─ require("combined-stream2")                          56 ms (1)
+I20180304-16:47:59.156(1)? | │  ├─ packages/webapp.js.........................................87 ms (1)
+I20180304-16:47:59.157(1)? | │  │  └─ require("/node_modules/meteor/webapp/webapp_server.js").87 ms (1)
+I20180304-16:47:59.157(1)? | │  │     ├─ require("./connect.js")...............................9 ms (1)
+I20180304-16:47:59.157(1)? | │  │     │  └─ require("connect")                                 9 ms (1)
+I20180304-16:47:59.157(1)? | │  │     ├─ require("compression")                               10 ms (1)
+I20180304-16:47:59.157(1)? | │  │     ├─ require("cookie-parser")                              1 ms (1)
+I20180304-16:47:59.157(1)? | │  │     ├─ require("qs-middleware")                              2 ms (1)
+I20180304-16:47:59.157(1)? | │  │     ├─ require("useragent")                                 14 ms (1)
+I20180304-16:47:59.157(1)? | │  │     ├─ require("send")                                      10 ms (1)
+I20180304-16:47:59.157(1)? | │  │     └─ other require("/node_modules/meteor/webapp/webapp_server.js") 38 ms
+I20180304-16:47:59.157(1)? | │  ├─ packages/ddp-server.js.....................................37 ms (1)
+I20180304-16:47:59.157(1)? | │  │  ├─ require("/node_modules/meteor/ddp-server/livedata_server.js") 1 ms (1)
+I20180304-16:47:59.157(1)? | │  │  └─ require("/node_modules/meteor/ddp-server/server_convenience.js").34 ms (1)
+I20180304-16:47:59.158(1)? | │  │     ├─ Npm.require("sockjs")                                31 ms (1)
+I20180304-16:47:59.158(1)? | │  │     ├─ Npm.require("permessage-deflate")                     2 ms (1)
+I20180304-16:47:59.158(1)? | │  │     └─ other require("/node_modules/meteor/ddp-server/server_convenience.js") 2 ms
+I20180304-16:47:59.158(1)? | │  ├─ packages/mongo.js...........................................5 ms (1)
+I20180304-16:47:59.158(1)? | │  │  └─ require("/node_modules/meteor/mongo/mongo_driver.js")    1 ms (1)
+I20180304-16:47:59.158(1)? | │  ├─ packages/server-render.js..................................64 ms (1)
+I20180304-16:47:59.158(1)? | │  │  └─ require("/node_modules/meteor/server-render/server.js").64 ms (1)
+I20180304-16:47:59.158(1)? | │  │     ├─ require("./server-register.js")......................54 ms (1)
+I20180304-16:47:59.158(1)? | │  │     │  ├─ require("magic-string")                            2 ms (1)
+I20180304-16:47:59.158(1)? | │  │     │  ├─ require("parse5")                                 23 ms (1)
+I20180304-16:47:59.158(1)? | │  │     │  └─ require("combined-stream2")                       28 ms (1)
+I20180304-16:47:59.158(1)? | │  │     └─ other require("/node_modules/meteor/server-render/server.js") 10 ms
+I20180304-16:47:59.158(1)? | │  ├─ packages/shell-server.js....................................8 ms (1)
+I20180304-16:47:59.159(1)? | │  │  └─ require("/node_modules/meteor/shell-server/main.js").....8 ms (1)
+I20180304-16:47:59.159(1)? | │  │     ├─ require("./shell-server.js")..........................4 ms (2)
+I20180304-16:47:59.159(1)? | │  │     │  ├─ require("repl")....................................2 ms (1)
+I20180304-16:47:59.159(1)? | │  │     │  │  └─ Npm.require("repl")                             2 ms (1)
+I20180304-16:47:59.159(1)? | │  │     │  └─ other require("./shell-server.js")                 1 ms
+I20180304-16:47:59.159(1)? | │  │     └─ other require("/node_modules/meteor/shell-server/main.js") 4 ms
+I20180304-16:47:59.159(1)? | │  ├─ packages/kadira_flow-router.js..............................2 ms (1)
+I20180304-16:47:59.159(1)? | │  │  └─ require("/node_modules/meteor/kadira:flow-router/server/router.js").2 ms (1)
+I20180304-16:47:59.159(1)? | │  │     └─ Npm.require("qs")                                     2 ms (1)
+I20180304-16:47:59.159(1)? | │  ├─ packages/htmljs.js                                          2 ms (1)
+I20180304-16:47:59.159(1)? | │  ├─ packages/johanbrook_publication-collector.js................1 ms (1)
+I20180304-16:47:59.159(1)? | │  │  └─ require("/node_modules/meteor/johanbrook:publication-collector/publication-collector.js") 1 ms (1)
+I20180304-16:47:59.160(1)? | │  ├─ packages/autoupdate.js......................................3 ms (1)
+I20180304-16:47:59.160(1)? | │  │  └─ require("/node_modules/meteor/autoupdate/autoupdate_server.js") 3 ms (1)
+I20180304-16:47:59.160(1)? | │  ├─ app/app.js.................................................30 ms (1)
+I20180304-16:47:59.160(1)? | │  │  └─ require("/server/main.js")..............................29 ms (1)
+I20180304-16:47:59.160(1)? | │  │     └─ require("/imports/startup/server")...................29 ms (1)
+I20180304-16:47:59.160(1)? | │  │        └─ require("./fixtures.js")..........................29 ms (1)
+I20180304-16:47:59.160(1)? | │  │           ├─ require("../../api/links/links.js")            27 ms (1)
+I20180304-16:47:59.160(1)? | │  │           └─ other require("./fixtures.js")                  1 ms
+I20180304-16:47:59.160(1)? | │  └─ other Load server bundles                                  65 ms
+I20180304-16:47:59.160(1)? | ├─ Call Meteor.startup hooks......................................8 ms (1)
+I20180304-16:47:59.160(1)? | │  ├─ Meteor.startup at autoupdate_server.js (packages/autoupdate/autoupdate_server.js:160:8) 3 ms (1)
+I20180304-16:47:59.160(1)? | │  └─ Meteor.startup at fixtures.js (imports/startup/server/fixtures.js:6:8) 4 ms (1)
+I20180304-16:47:59.167(1)? | └─ Run main()                                                     3 ms (1)
+I20180304-16:47:59.167(1)? | 
+I20180304-16:47:59.167(1)? | Top leaves:
+I20180304-16:47:59.167(1)? | 
+I20180304-16:47:59.167(1)? | (#1) Total: 590 ms (Server startup)
+I20180304-16:47:59.167(1)? | 
+=> Meteor server restarted
