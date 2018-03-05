@@ -47,6 +47,8 @@ Memory 16 GB 1600 MHz DDR3
 SSD
 ```
 
+The results are available on `logs/` folder, but the next table sums it up and serve for the analysis.
+
 | n  | App files | Package #A files | Package #B files | Change on | PreProjBuild | RebuildApp | ServerStartup | Total |
 |----|-----------|------------------|------------------|-----------|--------------|------------|---------------|-------|
 | 1  |    1000   |         1        |         1        |    app    |      283     |     818    |      620      |  1721 |
@@ -61,6 +63,8 @@ SSD
 | 10 |    1000   |       5000       |       5000       |    app    |     2,141    |    3,879   |      591      |  6611 |
 | 11 |    1000   |       5000       |       5000       |    p#A    |     6,188    |    5,443   |      633      | 12264 |
 | 12 |    1000   |       5000       |       5000       |    p#B    |     6,351    |    5,235   |      620      | 12206 |
+
+> Note: The times collected are happen on code change with meteor cached.
 
 ### Analysis
 
