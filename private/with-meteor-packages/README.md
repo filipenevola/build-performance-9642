@@ -18,20 +18,19 @@ app
 To get ready the environment to perform the experiment, you first have to bootstrap the app by running the next command.
 
 ``` bash
-./bootstrap
+./bootstrap.sh
 ```
 
  The packages will be integrated in the app as meteor packages. Then, use the `fakeFiles.sh` script, which populates of modules the app and packages by the given input.
 
 ``` shell
-./fakeFiles <n-app-files> <n-package-a-files> <n-package-b-files>
+./fakeFiles.sh <n-app-files> <n-package-a-files> <n-package-b-files>
 ```
 
-Then the meteor app is run and profiles are generated to measure the times on load and rebuild the app.
+Then the meteor app can be run and profiles are generated to measure the times on load and rebuild the app.
 
 ``` bash
-export METEOR_PROFILE=1 # tell the meteor builder to output the profiles logs
-yarn start # start the app
+./start.sh
 ```
 
 Sometimes, when testing with large amount of files you may get your Meteor app instance lagged on rebuild. It consumes so many memory resources, to overcome this issue you can expand your memory available for the node processes by running:
