@@ -17,7 +17,7 @@ echo "import { x1 } from './fake';" >> "../../imports/index.js"
 echo "import { x1 as xA } from 'meteor/a';" >> "../../imports/index.js"
 echo "import { x1 as xB } from 'meteor/b';" >> "../../imports/index.js"
 
-packageASrc=../../packages/a/dist
+packageASrc=../../packages/a/src
 # Package #A level file generator
 rm -rf $packageASrc/fake/*js
 echo "" > "$packageASrc/fake/index.js"
@@ -30,7 +30,7 @@ echo "" > "$packageASrc/index.js"
 echo "import { x1 } from './fake';" >> "$packageASrc/index.js"
 echo "import { x1 as x1B } from 'meteor/b';" >> "$packageASrc/index.js"
 
-packageBSrc=../../packages/b/dist
+packageBSrc=../../packages/b/src
 # Package #B level file generator
 rm -rf $packageBSrc/fake/*js
 echo "" > "$packageBSrc/fake/index.js"

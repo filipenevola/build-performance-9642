@@ -8,10 +8,14 @@ The structure of the app in terms of dependencies are:
 
 ``` bash
 app
-  - package a
-     - package b
-  - package b
+  - Meteor package a
+     - Meteor package b
+  - Meteor package b
 ```
+
+- Expose the "src" folder as the main entry point of the packages.
+- Describe the modules using ES6 within the "src" folder.
+- Ignore "dist" folder as Meteor resolves ES6 on the packages.
 
 ## Setup
 
@@ -69,7 +73,7 @@ The results are available on `logs/` folder, but the next table sums it up and s
 | 11 |    1000   |       5000       |       5000       |    p#A    |     6,188    |    5,443   |      633      | 12264 |
 | 12 |    1000   |       5000       |       5000       |    p#B    |     6,351    |    5,235   |      620      | 12206 |
 
-> Note: The times collected are happen on code change with meteor cached.
+> Note: The times showed in the table above correspond to the times on code change with meteor cached.
 
 ### Analysis
 
