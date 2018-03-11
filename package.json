@@ -1,11 +1,13 @@
 {
   "name": "build-performance-9642",
   "private": true,
+  "version": "0.0.0",
   "scripts": {
     "start": "export METEOR_PACKAGE_DIRS=./packages && meteor run",
     "test": "meteor test --once --driver-package meteortesting:mocha"
   },
   "workspaces": [
+    "./",
     "packages/*"
   ],
   "dependencies": {
