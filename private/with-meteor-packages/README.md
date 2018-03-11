@@ -15,7 +15,13 @@ app
 
 ## Setup
 
-To get ready the environment to perform the experiment, use the `fakeFiles.sh` script, which populates of modules the app and packages by the given input.
+To get ready the environment to perform the experiment, you first have to bootstrap the app by running the next command.
+
+``` bash
+./bootstrap
+```
+
+ The packages will be integrated in the app as meteor packages. Then, use the `fakeFiles.sh` script, which populates of modules the app and packages by the given input.
 
 ``` shell
 ./fakeFiles <n-app-files> <n-package-a-files> <n-package-b-files>
