@@ -1,7 +1,11 @@
-node_modules/
+node_modules
 .idea
 npm-debug.log*
 lerna-debug.log*
 lerna-error.log*
 yarn-debug.log*
 yarn-error.log*
+imports/index.js
+imports/fake
+packages/**/src
+packages/**/dist
