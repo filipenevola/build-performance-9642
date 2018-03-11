@@ -5,11 +5,15 @@
     "start": "export METEOR_PACKAGE_DIRS=./packages && meteor run",
     "test": "meteor test --once --driver-package meteortesting:mocha"
   },
+  "workspaces": [
+    "packages/*"
+  ],
   "dependencies": {
     "@babel/runtime": "^7.0.0-beta.40",
     "meteor-node-stubs": "^0.3.2"
   },
   "devDependencies": {
-    "chai": "^4.1.2"
+    "chai": "^4.1.2",
+    "lerna": "^2.9.0"
   }
 }
