@@ -49,7 +49,7 @@ Then the meteor app can be run and profiles are generated to measure the times o
 ./start
 ```
 
-I used [a module](https://www.npmjs.com/package/concurrently) that enable us to run different compilation processes in parallel, proving the its own way to identify the flow and times of the proccesments. The distinguision has been made between the meteor process to build the app (`app` tag), and the babel processes to transpile each of the packages (`package-a` and `package-b` tags).
+I used [a module](https://www.npmjs.com/package/concurrently) that enable us to run different compilation processes in parallel, provinding its own way to identify the flow and times of the proccesments. The distinguision has been made between the meteor process to build the app (`app` tag), and the babel processes to transpile each of the packages (`package-a` and `package-b` tags).
 
 Besides, sometimes, when testing with large amount of files you may get your Meteor app instance lagged on rebuild. It consumes so many memory resources, to overcome this issue you can expand your memory available for the node processes by running:
 
