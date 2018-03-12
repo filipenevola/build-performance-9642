@@ -4,6 +4,9 @@
   "version": "0.0.0",
   "scripts": {
     "start": "export METEOR_PACKAGE_DIRS=./packages && meteor run",
+    "babel-dev": "concurrently -c blue,cyan,green -n package-a,package-b,app -p \"[{name}-{time}]\" \"yarn babel-dev:package-a\" \"yarn babel-dev:package-b\" \"yarn start\"",
+    "babel-dev:package-a": "babel packages/a/src -d packages/a/dist -w -p --debug",
+    "babel-dev:package-b": "babel packages/b/src -d packages/b/dist -w -p --debug",
     "test": "meteor test --once --driver-package meteortesting:mocha"
   },
   "workspaces": [
@@ -15,7 +18,12 @@
     "meteor-node-stubs": "^0.3.3"
   },
   "devDependencies": {
+    "@babel/cli": "^7.0.0-beta.40",
+    "@babel/core": "^7.0.0-beta.40",
+    "@babel/preset-env": "^7.0.0-beta.40",
+    "babel-preset-meteor": "^7.0.0-beta.40-1",
     "chai": "^4.1.2",
+    "concurrently": "^3.5.1",
     "lerna": "^2.9.0"
   }
 }
