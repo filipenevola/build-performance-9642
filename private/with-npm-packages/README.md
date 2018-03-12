@@ -22,9 +22,12 @@ app
 The process to compile the packages on code change is as follows.
 
 1 - Lerna has created symbolic links from `packages/**` to `node_modules/**`. So any change on the packages will make the meteor builder to react.
-1 - On package code change, Babel transpile changed ES6 modules within "src" to plain old ES5 JavaScript within "dist" folder.
-2 - Meteor builder remains idle as "src" folder is ignored using `.meteorignore` file
-3 - Once babel transpilation is done, Meteor detects changes on "dist" folder of the package and compiles the app.
+
+2 - On package code change, Babel transpile changed ES6 modules within "src" to plain old ES5 JavaScript within "dist" folder.
+
+3 - Meteor builder remains idle as "src" folder is ignored using `.meteorignore` file
+
+4 - Once babel transpilation is done, Meteor detects changes on "dist" folder of the package and compiles the app.
 
 ## Setup
 
