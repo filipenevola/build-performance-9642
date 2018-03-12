@@ -1,0 +1,264 @@
+| (#10) Profiling: ProjectContext prepareProjectForBuild
+[app-2018-03-11 16:40:34.326] For compatibility, the PACKAGE_DIRS environment variable is deprecated and will
+[app-2018-03-11 16:40:34.326] be removed in a future Meteor release.
+[app-2018-03-11 16:40:34.326] Developers should now use METEOR_PACKAGE_DIRS and Windows projects should now
+[app-2018-03-11 16:40:34.326] use a semi-colon (;) to separate paths.
+[app-2018-03-11 16:40:34.597] | 
+[app-2018-03-11 16:40:34.597] | ProjectContext prepareProjectForBuild...........................271 ms (1)
+[app-2018-03-11 16:40:34.597] | ├─ _initializeCatalog.............................................8 ms (1)
+[app-2018-03-11 16:40:34.597] | │  └─ LocalCatalog#initialize.....................................7 ms (1)
+[app-2018-03-11 16:40:34.598] | │     ├─ LocalCatalog#_computeEffectiveLocalPackages..............3 ms (1)
+[app-2018-03-11 16:40:34.598] | │     │  └─ optimistic hashOrNull                                 3 ms (17)
+[app-2018-03-11 16:40:34.598] | │     └─ LocalCatalog#_loadLocalPackages..........................3 ms (1)
+[app-2018-03-11 16:40:34.598] | │        └─ PackageSource#initFromPackageDir......................3 ms (4)
+[app-2018-03-11 16:40:34.598] | │           └─ sqlite query                                       2 ms (4)
+[app-2018-03-11 16:40:34.598] | ├─ _resolveConstraints...........................................10 ms (1)
+[app-2018-03-11 16:40:34.598] | │  ├─ Select Package Versions.....................................5 ms (1)
+[app-2018-03-11 16:40:34.598] | │  │  └─ new CS.Input                                             5 ms (1)
+[app-2018-03-11 16:40:34.598] | │  └─ other _resolveConstraints                                   4 ms
+[app-2018-03-11 16:40:34.598] | ├─ _downloadMissingPackages......................................20 ms (1)
+[app-2018-03-11 16:40:34.598] | │  ├─ Isopack.readMetadataFromDirectory...........................5 ms (84)
+[app-2018-03-11 16:40:34.598] | │  │  ├─ files.readFile                                           2 ms (84)
+[app-2018-03-11 16:40:34.598] | │  │  └─ other Isopack.readMetadataFromDirectory                  2 ms
+[app-2018-03-11 16:40:34.599] | │  └─ other _downloadMissingPackages                             14 ms
+[app-2018-03-11 16:40:34.599] | └─ _buildLocalPackages..........................................234 ms (1)
+[app-2018-03-11 16:40:34.599] |    ├─ IsopackCache Load local isopack                             1 ms (84)
+[app-2018-03-11 16:40:34.599] |    └─ other _buildLocalPackages                                 232 ms
+[app-2018-03-11 16:40:34.599] | 
+[app-2018-03-11 16:40:34.599] | Top leaves:
+[app-2018-03-11 16:40:34.600] | other _buildLocalPackages..................................232 ms (1)
+[app-2018-03-11 16:40:34.600] | 
+[app-2018-03-11 16:40:34.600] | (#10) Total: 271 ms (ProjectContext prepareProjectForBuild)
+[app-2018-03-11 16:40:34.600] | 
+[app-2018-03-11 16:40:34.602] | (#11) Profiling: Rebuild App
+[app-2018-03-11 16:40:35.887] | 
+[app-2018-03-11 16:40:35.889] | Rebuild App...................................................1,285 ms (1)
+[app-2018-03-11 16:40:35.889] | └─ files.withCache............................................1,285 ms (1)
+[app-2018-03-11 16:40:35.889] |    ├─ compiler.compile(the app).................................193 ms (1)
+[app-2018-03-11 16:40:35.889] |    │  └─ files.withCache........................................193 ms (2)
+[app-2018-03-11 16:40:35.889] |    │     └─ compileUnibuild (the app)...........................193 ms (2)
+[app-2018-03-11 16:40:35.889] |    │        ├─ files.withCache...................................63 ms (2)
+[app-2018-03-11 16:40:35.889] |    │        │  ├─ files.realpath                                  3 ms (39)
+[app-2018-03-11 16:40:35.889] |    │        │  ├─ files.readdir                                   7 ms (78)
+[app-2018-03-11 16:40:35.889] |    │        │  ├─ files.stat                                      9 ms (1067)
+[app-2018-03-11 16:40:35.889] |    │        │  └─ other files.withCache                          43 ms
+[app-2018-03-11 16:40:35.890] |    │        ├─ files.readFile                                     2 ms (40)
+[app-2018-03-11 16:40:35.890] |    │        ├─ sha1                                               2 ms (40)
+[app-2018-03-11 16:40:35.890] |    │        ├─ optimistic readFile                                6 ms (2054)
+[app-2018-03-11 16:40:35.890] |    │        ├─ optimistic hashOrNull                              3 ms (2054)
+[app-2018-03-11 16:40:35.890] |    │        └─ other compileUnibuild (the app)                  116 ms
+[app-2018-03-11 16:40:35.890] |    ├─ compiler.lint(the app)                                      2 ms (1)
+[app-2018-03-11 16:40:35.890] |    ├─ bundler.bundle..makeClientTarget..........................483 ms (1)
+[app-2018-03-11 16:40:35.890] |    │  └─ Target#make............................................483 ms (1)
+[app-2018-03-11 16:40:35.890] |    │     ├─ Isopack#getUnibuildAtArch                             1 ms (806)
+[app-2018-03-11 16:40:35.890] |    │     ├─ Target#_runCompilerPlugins..........................403 ms (1)
+[app-2018-03-11 16:40:35.890] |    │     │  ├─ sha1                                               1 ms (98)
+[app-2018-03-11 16:40:35.890] |    │     │  ├─ Isopack#getUnibuildAtArch                          2 ms (783)
+[app-2018-03-11 16:40:35.890] |    │     │  ├─ plugin ecmascript................................384 ms (1)
+[app-2018-03-11 16:40:35.890] |    │     │  │  ├─ optimistic statOrNull                          26 ms (10560)
+[app-2018-03-11 16:40:35.890] |    │     │  │  ├─ Babel.compile                                  39 ms (1107)
+[app-2018-03-11 16:40:35.890] |    │     │  │  ├─ sha1                                            7 ms (1108)
+[app-2018-03-11 16:40:35.890] |    │     │  │  └─ other plugin ecmascript                       312 ms
+[app-2018-03-11 16:40:35.890] |    │     │  ├─ plugin templating-compiler                         2 ms (1)
+[app-2018-03-11 16:40:35.890] |    │     │  └─ other Target#_runCompilerPlugins                  13 ms
+[app-2018-03-11 16:40:35.890] |    │     ├─ Target#_emitResources................................61 ms (1)
+[app-2018-03-11 16:40:35.890] |    │     │  ├─ PackageSourceBatch.computeJsOutputFilesMap........56 ms (1)
+[app-2018-03-11 16:40:35.890] |    │     │  │  ├─ ImportScanner#_getAbsModuleId                   7 ms (1534)
+[app-2018-03-11 16:40:35.890] |    │     │  │  ├─ ImportScanner#_findImportedModuleIdentifiers    1 ms (1438)
+[app-2018-03-11 16:40:35.890] |    │     │  │  ├─ ImportScanner#_readFile                         3 ms (348)
+[app-2018-03-11 16:40:35.890] |    │     │  │  └─ other PackageSourceBatch.computeJsOutputFilesMap 44 ms
+[app-2018-03-11 16:40:35.890] |    │     │  ├─ PackageSourceBatch#getResources....................4 ms (66)
+[app-2018-03-11 16:40:35.891] |    │     │  │  └─ PackageSourceBatch#_linkJS                      3 ms (66)
+[app-2018-03-11 16:40:35.891] |    │     │  └─ other Target#_emitResources                        1 ms
+[app-2018-03-11 16:40:35.891] |    │     ├─ Target#minifyJs                                      12 ms (1)
+[app-2018-03-11 16:40:35.891] |    │     ├─ sha1                                                  3 ms (136)
+[app-2018-03-11 16:40:35.891] |    │     └─ other Target#make                                     2 ms
+[app-2018-03-11 16:40:35.891] |    ├─ bundler.bundle..makeServerTarget..........................408 ms (1)
+[app-2018-03-11 16:40:35.891] |    │  └─ Target#make............................................408 ms (1)
+[app-2018-03-11 16:40:35.891] |    │     ├─ Isopack#getUnibuildAtArch                             2 ms (933)
+[app-2018-03-11 16:40:35.891] |    │     ├─ Target#_runCompilerPlugins..........................377 ms (1)
+[app-2018-03-11 16:40:35.891] |    │     │  ├─ sha1                                               1 ms (98)
+[app-2018-03-11 16:40:35.891] |    │     │  ├─ Isopack#getUnibuildAtArch                          1 ms (927)
+[app-2018-03-11 16:40:35.891] |    │     │  ├─ plugin ecmascript................................365 ms (1)
+[app-2018-03-11 16:40:35.891] |    │     │  │  ├─ optimistic statOrNull                          19 ms (10524)
+[app-2018-03-11 16:40:35.892] |    │     │  │  ├─ Babel.compile                                  44 ms (1127)
+[app-2018-03-11 16:40:35.892] |    │     │  │  ├─ sha1                                            7 ms (1128)
+[app-2018-03-11 16:40:35.892] |    │     │  │  └─ other plugin ecmascript                       295 ms
+[app-2018-03-11 16:40:35.892] |    │     │  └─ other Target#_runCompilerPlugins                  10 ms
+[app-2018-03-11 16:40:35.892] |    │     ├─ Target#_emitResources................................27 ms (1)
+[app-2018-03-11 16:40:35.892] |    │     │  ├─ PackageSourceBatch.computeJsOutputFilesMap........23 ms (1)
+[app-2018-03-11 16:40:35.892] |    │     │  │  ├─ ImportScanner#_getAbsModuleId                   9 ms (1201)
+[app-2018-03-11 16:40:35.892] |    │     │  │  └─ other PackageSourceBatch.computeJsOutputFilesMap 13 ms
+[app-2018-03-11 16:40:35.892] |    │     │  ├─ PackageSourceBatch#getResources....................2 ms (72)
+[app-2018-03-11 16:40:35.892] |    │     │  │  └─ PackageSourceBatch#_linkJS                      2 ms (72)
+[app-2018-03-11 16:40:35.892] |    │     │  └─ other Target#_emitResources                        2 ms
+[app-2018-03-11 16:40:35.892] |    │     └─ other Target#make                                     2 ms
+[app-2018-03-11 16:40:35.892] |    ├─ bundler writeSiteArchive..................................196 ms (1)
+[app-2018-03-11 16:40:35.892] |    │  └─ bundler writeTargetToPath..............................195 ms (2)
+[app-2018-03-11 16:40:35.893] |    │     ├─ ClientTarget#write...................................22 ms (1)
+[app-2018-03-11 16:40:35.896] |    │     │  ├─ bundler writeFile..................................6 ms (72)
+[app-2018-03-11 16:40:35.896] |    │     │  │  └─ Builder#write...................................6 ms (72)
+[app-2018-03-11 16:40:35.896] |    │     │  │     └─ files.writeFile                              5 ms (1)
+[app-2018-03-11 16:40:35.896] |    │     │  ├─ Builder#write......................................5 ms (23)
+[app-2018-03-11 16:40:35.896] |    │     │  │  ├─ sha1                                            1 ms (23)
+[app-2018-03-11 16:40:35.896] |    │     │  │  └─ files.writeFile                                 4 ms (1)
+[app-2018-03-11 16:40:35.896] |    │     │  └─ other ClientTarget#write                          11 ms
+[app-2018-03-11 16:40:35.896] |    │     └─ ServerTarget#write..................................172 ms (1)
+[app-2018-03-11 16:40:35.896] |    │        ├─ Builder#write                                      2 ms (12)
+[app-2018-03-11 16:40:35.896] |    │        └─ JsImage#write....................................170 ms (1)
+[app-2018-03-11 16:40:35.897] |    │           ├─ Builder#write..................................10 ms (128)
+[app-2018-03-11 16:40:35.897] |    │           │  ├─ sha1                                         8 ms (128)
+[app-2018-03-11 16:40:35.897] |    │           │  └─ other Builder#write                          2 ms
+[app-2018-03-11 16:40:35.897] |    │           ├─ sha1                                            3 ms (76)
+[app-2018-03-11 16:40:35.897] |    │           ├─ meteorNpm.isPortable...........................68 ms (23)
+[app-2018-03-11 16:40:35.897] |    │           │  ├─ meteorNpm.isPortable........................61 ms (670)
+[app-2018-03-11 16:40:35.897] |    │           │  │  ├─ optimistic lstat                          3 ms (670)
+[app-2018-03-11 16:40:35.897] |    │           │  │  ├─ optimistic statOrNull                     2 ms (667)
+[app-2018-03-11 16:40:35.897] |    │           │  │  ├─ optimistic readJsonOrNull................35 ms (665)
+[app-2018-03-11 16:40:35.897] |    │           │  │  │  ├─ optimistic readFile...................23 ms (665)
+[app-2018-03-11 16:40:35.898] |    │           │  │  │  │  ├─ files.readFile                     16 ms (665)
+[app-2018-03-11 16:40:35.898] |    │           │  │  │  │  └─ other optimistic readFile           7 ms
+[app-2018-03-11 16:40:35.898] |    │           │  │  │  └─ other optimistic readJsonOrNull       12 ms
+[app-2018-03-11 16:40:35.898] |    │           │  │  ├─ meteorNpm.isPortable......................8 ms (127)
+[app-2018-03-11 16:40:35.898] |    │           │  │  │  ├─ optimistic readJsonOrNull..............6 ms (127)
+[app-2018-03-11 16:40:35.899] |    │           │  │  │  │  ├─ optimistic readFile.................4 ms (127)
+[app-2018-03-11 16:40:35.899] |    │           │  │  │  │  │  ├─ files.readFile                   3 ms (127)
+[app-2018-03-11 16:40:35.899] |    │           │  │  │  │  │  └─ other optimistic readFile        1 ms
+[app-2018-03-11 16:40:35.899] |    │           │  │  │  │  └─ other optimistic readJsonOrNull     2 ms
+[app-2018-03-11 16:40:35.899] |    │           │  │  │  └─ other meteorNpm.isPortable             1 ms
+[app-2018-03-11 16:40:35.899] |    │           │  │  └─ other meteorNpm.isPortable               13 ms
+[app-2018-03-11 16:40:35.899] |    │           │  └─ other meteorNpm.isPortable                   6 ms
+[app-2018-03-11 16:40:35.899] |    │           ├─ Builder#copyDirectory..........................52 ms (23)
+[app-2018-03-11 16:40:35.899] |    │           │  ├─ files.realpath                               1 ms (25)
+[app-2018-03-11 16:40:35.899] |    │           │  ├─ files.symlink                               11 ms (194)
+[app-2018-03-11 16:40:35.899] |    │           │  ├─ files.rm_recursive                          22 ms (97)
+[app-2018-03-11 16:40:35.899] |    │           │  ├─ optimistic lstatOrNull                       8 ms (473)
+[app-2018-03-11 16:40:35.899] |    │           │  └─ other Builder#copyDirectory                  9 ms
+[app-2018-03-11 16:40:35.900] |    │           └─ other JsImage#write                            37 ms
+[app-2018-03-11 16:40:35.900] |    └─ other files.withCache                                       2 ms
+[app-2018-03-11 16:40:35.900] | 
+[app-2018-03-11 16:40:35.900] | Top leaves:
+[app-2018-03-11 16:40:35.903] | other plugin ecmascript....................................607 ms (2)
+[app-2018-03-11 16:40:35.904] | other compileUnibuild (the app)............................116 ms (2)
+[app-2018-03-11 16:40:35.904] | 
+[app-2018-03-11 16:40:35.904] | (#11) Total: 1,285 ms (Rebuild App)
+[app-2018-03-11 16:40:35.904] | 
+I20180311-16:40:36.852(1)? | (#1) Profiling: Server startup      
+[app-2018-03-11 16:40:36.852] I20180311-16:40:36.852(1)? | 
+[app-2018-03-11 16:40:36.853] I20180311-16:40:36.852(1)? | Server startup..................................................756 ms (1)
+[app-2018-03-11 16:40:36.853] I20180311-16:40:36.853(1)? | ├─ Load server bundles..........................................745 ms (1)
+[app-2018-03-11 16:40:36.853] I20180311-16:40:36.853(1)? | │  ├─ packages/meteor.js..........................................3 ms (1)
+[app-2018-03-11 16:40:36.853] I20180311-16:40:36.853(1)? | │  │  ├─ Npm.require("meteor-deque")                              1 ms (1)
+[app-2018-03-11 16:40:36.853] I20180311-16:40:36.853(1)? | │  │  └─ other packages/meteor.js                                 2 ms
+[app-2018-03-11 16:40:36.853] I20180311-16:40:36.853(1)? | │  ├─ packages/npm-mongo.js......................................88 ms (1)
+[app-2018-03-11 16:40:36.853] I20180311-16:40:36.853(1)? | │  │  └─ Npm.require("mongodb")                                  88 ms (1)
+[app-2018-03-11 16:40:36.853] I20180311-16:40:36.853(1)? | │  ├─ packages/modules.js........................................10 ms (1)
+[app-2018-03-11 16:40:36.853] I20180311-16:40:36.853(1)? | │  │  └─ require("/node_modules/meteor/modules/server.js").......10 ms (1)
+[app-2018-03-11 16:40:36.853] I20180311-16:40:36.853(1)? | │  │     └─ require("./reify.js").................................8 ms (1)
+[app-2018-03-11 16:40:36.854] I20180311-16:40:36.853(1)? | │  │        └─ require("reify/lib/runtime")                       7 ms (1)
+[app-2018-03-11 16:40:36.854] I20180311-16:40:36.854(1)? | │  ├─ packages/ecmascript-runtime-server.js.......................9 ms (1)
+[app-2018-03-11 16:40:36.854] I20180311-16:40:36.854(1)? | │  │  └─ require("/node_modules/meteor/ecmascript-runtime-server/runtime.js").9 ms (1)
+[app-2018-03-11 16:40:36.854] I20180311-16:40:36.854(1)? | │  │     └─ require("core-js/modules/es7.string.pad-start")       9 ms (1)
+[app-2018-03-11 16:40:36.854] I20180311-16:40:36.854(1)? | │  ├─ packages/babel-compiler.js..................................2 ms (1)
+[app-2018-03-11 16:40:36.854] I20180311-16:40:36.854(1)? | │  │  └─ Npm.require("semver")                                    2 ms (1)
+[app-2018-03-11 16:40:36.854] I20180311-16:40:36.854(1)? | │  ├─ packages/babel-runtime.js...................................1 ms (1)
+[app-2018-03-11 16:40:36.854] I20180311-16:40:36.854(1)? | │  │  └─ require("/node_modules/meteor/babel-runtime/babel-runtime.js") 1 ms (1)
+[app-2018-03-11 16:40:36.854] I20180311-16:40:36.854(1)? | │  ├─ packages/promise.js.........................................2 ms (1)
+[app-2018-03-11 16:40:36.854] I20180311-16:40:36.854(1)? | │  │  └─ require("/node_modules/meteor/promise/server.js")........2 ms (1)
+[app-2018-03-11 16:40:36.855] I20180311-16:40:36.854(1)? | │  │     └─ require("meteor-promise")                             1 ms (1)
+[app-2018-03-11 16:40:36.855] I20180311-16:40:36.855(1)? | │  ├─ packages/http.js..........................................121 ms (1)
+[app-2018-03-11 16:40:36.855] I20180311-16:40:36.855(1)? | │  │  └─ require("/node_modules/meteor/http/httpcall_server.js").121 ms (1)
+[app-2018-03-11 16:40:36.856] I20180311-16:40:36.855(1)? | │  │     └─ require("request")                                  120 ms (1)
+[app-2018-03-11 16:40:36.857] I20180311-16:40:36.856(1)? | │  ├─ packages/dynamic-import.js..................................6 ms (1)
+[app-2018-03-11 16:40:36.859] I20180311-16:40:36.857(1)? | │  │  └─ require("/node_modules/meteor/dynamic-import/server.js").6 ms (1)
+[app-2018-03-11 16:40:36.859] I20180311-16:40:36.859(1)? | │  │     ├─ require("./security.js")                              2 ms (1)
+[app-2018-03-11 16:40:36.859] I20180311-16:40:36.859(1)? | │  │     └─ require("./client.js")................................3 ms (1)
+[app-2018-03-11 16:40:36.859] I20180311-16:40:36.859(1)? | │  │        └─ require("./cache.js")                              2 ms (1)
+[app-2018-03-11 16:40:36.859] I20180311-16:40:36.859(1)? | │  ├─ packages/random.js..........................................2 ms (1)
+[app-2018-03-11 16:40:36.859] I20180311-16:40:36.859(1)? | │  │  └─ require("/node_modules/meteor/random/random.js")         2 ms (1)
+[app-2018-03-11 16:40:36.860] I20180311-16:40:36.859(1)? | │  ├─ packages/ordered-dict.js....................................2 ms (1)
+[app-2018-03-11 16:40:36.860] I20180311-16:40:36.860(1)? | │  │  └─ require("/node_modules/meteor/ordered-dict/ordered_dict.js") 1 ms (1)
+[app-2018-03-11 16:40:36.860] I20180311-16:40:36.860(1)? | │  ├─ packages/minimongo.js.......................................9 ms (1)
+[app-2018-03-11 16:40:36.860] I20180311-16:40:36.860(1)? | │  │  └─ require("/node_modules/meteor/minimongo/minimongo_server.js").9 ms (1)
+[app-2018-03-11 16:40:36.860] I20180311-16:40:36.860(1)? | │  │     └─ require("./minimongo_common.js")......................8 ms (1)
+[app-2018-03-11 16:40:36.860] I20180311-16:40:36.860(1)? | │  │        ├─ require("./local_collection.js")...................4 ms (1)
+[app-2018-03-11 16:40:36.861] I20180311-16:40:36.860(1)? | │  │        │  ├─ require("./cursor.js")..........................2 ms (1)
+[app-2018-03-11 16:40:36.861] I20180311-16:40:36.861(1)? | │  │        │  │  └─ require("./common.js")                       1 ms (1)
+[app-2018-03-11 16:40:36.861] I20180311-16:40:36.861(1)? | │  │        │  └─ other require("./local_collection.js")          2 ms
+[app-2018-03-11 16:40:36.861] I20180311-16:40:36.861(1)? | │  │        └─ require("./matcher.js")                            2 ms (1)
+[app-2018-03-11 16:40:36.861] I20180311-16:40:36.861(1)? | │  ├─ packages/ddp-common.js                                      1 ms (1)
+[app-2018-03-11 16:40:36.861] I20180311-16:40:36.861(1)? | │  ├─ packages/ddp-client.js......................................7 ms (1)
+[app-2018-03-11 16:40:36.861] I20180311-16:40:36.861(1)? | │  │  └─ require("/node_modules/meteor/ddp-client/server/server.js").7 ms (1)
+[app-2018-03-11 16:40:36.862] I20180311-16:40:36.861(1)? | │  │     └─ require("../common/namespace.js").....................6 ms (1)
+[app-2018-03-11 16:40:36.862] I20180311-16:40:36.861(1)? | │  │        ├─ require("./livedata_connection.js")                3 ms (1)
+[app-2018-03-11 16:40:36.862] I20180311-16:40:36.862(1)? | │  │        └─ other require("../common/namespace.js")            3 ms
+[app-2018-03-11 16:40:36.862] I20180311-16:40:36.862(1)? | │  ├─ packages/underscore.js                                      1 ms (1)
+[app-2018-03-11 16:40:36.862] I20180311-16:40:36.862(1)? | │  ├─ packages/boilerplate-generator.js..........................98 ms (1)
+[app-2018-03-11 16:40:36.862] I20180311-16:40:36.862(1)? | │  │  └─ require("/node_modules/meteor/boilerplate-generator/generator.js").98 ms (1)
+[app-2018-03-11 16:40:36.862] I20180311-16:40:36.862(1)? | │  │     └─ require("combined-stream2")                          96 ms (1)
+[app-2018-03-11 16:40:36.862] I20180311-16:40:36.862(1)? | │  ├─ packages/webapp.js........................................110 ms (1)
+[app-2018-03-11 16:40:36.862] I20180311-16:40:36.862(1)? | │  │  └─ require("/node_modules/meteor/webapp/webapp_server.js").110 ms (1)
+[app-2018-03-11 16:40:36.862] I20180311-16:40:36.862(1)? | │  │     ├─ require("fs")                                         2 ms (1)
+[app-2018-03-11 16:40:36.862] I20180311-16:40:36.862(1)? | │  │     ├─ require("./connect.js")...............................8 ms (1)
+[app-2018-03-11 16:40:36.863] I20180311-16:40:36.862(1)? | │  │     │  └─ require("connect")                                 8 ms (1)
+[app-2018-03-11 16:40:36.863] I20180311-16:40:36.862(1)? | │  │     ├─ require("compression")                               11 ms (1)
+[app-2018-03-11 16:40:36.863] I20180311-16:40:36.863(1)? | │  │     ├─ require("cookie-parser")                              2 ms (1)
+[app-2018-03-11 16:40:36.863] I20180311-16:40:36.863(1)? | │  │     ├─ require("qs-middleware")                              2 ms (1)
+[app-2018-03-11 16:40:36.863] I20180311-16:40:36.863(1)? | │  │     ├─ require("useragent")                                 19 ms (1)
+[app-2018-03-11 16:40:36.863] I20180311-16:40:36.863(1)? | │  │     ├─ require("send")                                      12 ms (1)
+[app-2018-03-11 16:40:36.863] I20180311-16:40:36.863(1)? | │  │     └─ other require("/node_modules/meteor/webapp/webapp_server.js") 52 ms
+[app-2018-03-11 16:40:36.864] I20180311-16:40:36.863(1)? | │  ├─ packages/ddp-server.js.....................................48 ms (1)
+[app-2018-03-11 16:40:36.864] I20180311-16:40:36.863(1)? | │  │  ├─ require("/node_modules/meteor/ddp-server/stream_server.js").3 ms (1)
+[app-2018-03-11 16:40:36.864] I20180311-16:40:36.864(1)? | │  │  │  ├─ Npm.require("url")                                    2 ms (1)
+[app-2018-03-11 16:40:36.864] I20180311-16:40:36.864(1)? | │  │  │  └─ other require("/node_modules/meteor/ddp-server/stream_server.js") 1 ms
+[app-2018-03-11 16:40:36.864] I20180311-16:40:36.864(1)? | │  │  ├─ require("/node_modules/meteor/ddp-server/livedata_server.js") 2 ms (1)
+[app-2018-03-11 16:40:36.864] I20180311-16:40:36.864(1)? | │  │  └─ require("/node_modules/meteor/ddp-server/server_convenience.js").43 ms (1)
+[app-2018-03-11 16:40:36.864] I20180311-16:40:36.864(1)? | │  │     ├─ Npm.require("sockjs")                                38 ms (1)
+[app-2018-03-11 16:40:36.864] I20180311-16:40:36.864(1)? | │  │     ├─ Npm.require("permessage-deflate")                     2 ms (1)
+[app-2018-03-11 16:40:36.864] I20180311-16:40:36.864(1)? | │  │     └─ other require("/node_modules/meteor/ddp-server/server_convenience.js") 2 ms
+[app-2018-03-11 16:40:36.864] I20180311-16:40:36.864(1)? | │  ├─ packages/allow-deny.js                                      8 ms (1)
+[app-2018-03-11 16:40:36.864] I20180311-16:40:36.864(1)? | │  ├─ packages/mongo.js...........................................8 ms (1)
+[app-2018-03-11 16:40:36.864] I20180311-16:40:36.864(1)? | │  │  ├─ require("/node_modules/meteor/mongo/mongo_driver.js")    1 ms (1)
+[app-2018-03-11 16:40:36.865] I20180311-16:40:36.864(1)? | │  │  ├─ require("/node_modules/meteor/mongo/oplog_tailing.js")   1 ms (1)
+[app-2018-03-11 16:40:36.865] I20180311-16:40:36.864(1)? | │  │  └─ require("/node_modules/meteor/mongo/observe_multiplex.js") 3 ms (1)
+[app-2018-03-11 16:40:36.865] I20180311-16:40:36.865(1)? | │  ├─ packages/server-render.js..................................63 ms (1)
+[app-2018-03-11 16:40:36.865] I20180311-16:40:36.865(1)? | │  │  └─ require("/node_modules/meteor/server-render/server.js").63 ms (1)
+[app-2018-03-11 16:40:36.865] I20180311-16:40:36.865(1)? | │  │     ├─ require("./server-register.js")......................53 ms (1)
+[app-2018-03-11 16:40:36.865] I20180311-16:40:36.865(1)? | │  │     │  ├─ require("magic-string")                            3 ms (1)
+[app-2018-03-11 16:40:36.865] I20180311-16:40:36.865(1)? | │  │     │  ├─ require("parse5")                                 18 ms (1)
+[app-2018-03-11 16:40:36.865] I20180311-16:40:36.865(1)? | │  │     │  └─ require("combined-stream2")                       30 ms (1)
+[app-2018-03-11 16:40:36.865] I20180311-16:40:36.865(1)? | │  │     └─ other require("/node_modules/meteor/server-render/server.js") 10 ms
+[app-2018-03-11 16:40:36.865] I20180311-16:40:36.865(1)? | │  ├─ packages/shell-server.js....................................8 ms (1)
+[app-2018-03-11 16:40:36.865] I20180311-16:40:36.865(1)? | │  │  └─ require("/node_modules/meteor/shell-server/main.js").....8 ms (1)
+[app-2018-03-11 16:40:36.865] I20180311-16:40:36.865(1)? | │  │     ├─ require("./shell-server.js")..........................4 ms (2)
+[app-2018-03-11 16:40:36.865] I20180311-16:40:36.865(1)? | │  │     │  ├─ require("repl")....................................2 ms (1)
+[app-2018-03-11 16:40:36.866] I20180311-16:40:36.865(1)? | │  │     │  │  └─ Npm.require("repl")                             2 ms (1)
+[app-2018-03-11 16:40:36.866] I20180311-16:40:36.866(1)? | │  │     │  └─ other require("./shell-server.js")                 1 ms
+[app-2018-03-11 16:40:36.866] I20180311-16:40:36.866(1)? | │  │     └─ other require("/node_modules/meteor/shell-server/main.js") 4 ms
+[app-2018-03-11 16:40:36.866] I20180311-16:40:36.866(1)? | │  ├─ packages/kadira_flow-router.js..............................3 ms (1)
+[app-2018-03-11 16:40:36.866] I20180311-16:40:36.866(1)? | │  │  └─ require("/node_modules/meteor/kadira:flow-router/server/router.js").2 ms (1)
+[app-2018-03-11 16:40:36.866] I20180311-16:40:36.866(1)? | │  │     └─ Npm.require("qs")                                     2 ms (1)
+[app-2018-03-11 16:40:36.866] I20180311-16:40:36.866(1)? | │  ├─ packages/htmljs.js                                          2 ms (1)
+[app-2018-03-11 16:40:36.866] I20180311-16:40:36.866(1)? | │  ├─ packages/johanbrook_publication-collector.js................3 ms (1)
+[app-2018-03-11 16:40:36.866] I20180311-16:40:36.866(1)? | │  │  └─ require("/node_modules/meteor/johanbrook:publication-collector/publication-collector.js") 3 ms (1)
+[app-2018-03-11 16:40:36.867] I20180311-16:40:36.866(1)? | │  ├─ packages/autoupdate.js......................................3 ms (1)
+[app-2018-03-11 16:40:36.867] I20180311-16:40:36.867(1)? | │  │  └─ require("/node_modules/meteor/autoupdate/autoupdate_server.js") 3 ms (1)
+[app-2018-03-11 16:40:36.867] I20180311-16:40:36.867(1)? | │  ├─ app/app.js.................................................37 ms (1)
+[app-2018-03-11 16:40:36.867] I20180311-16:40:36.867(1)? | │  │  └─ require("/server/main.js")..............................37 ms (1)
+[app-2018-03-11 16:40:36.867] I20180311-16:40:36.867(1)? | │  │     └─ require("/imports/startup/server")...................37 ms (1)
+[app-2018-03-11 16:40:36.867] I20180311-16:40:36.867(1)? | │  │        └─ require("./fixtures.js")..........................36 ms (1)
+[app-2018-03-11 16:40:36.867] I20180311-16:40:36.867(1)? | │  │           ├─ require("../../api/links/links.js")            35 ms (1)
+[app-2018-03-11 16:40:36.867] I20180311-16:40:36.867(1)? | │  │           └─ other require("./fixtures.js")                  2 ms
+[app-2018-03-11 16:40:36.867] I20180311-16:40:36.867(1)? | │  └─ other Load server bundles                                  77 ms
+[app-2018-03-11 16:40:36.867] I20180311-16:40:36.867(1)? | ├─ Call Meteor.startup hooks......................................9 ms (1)
+[app-2018-03-11 16:40:36.868] I20180311-16:40:36.867(1)? | │  ├─ Meteor.startup at autoupdate_server.js (packages/autoupdate/autoupdate_server.js:160:8) 3 ms (1)
+[app-2018-03-11 16:40:36.868] I20180311-16:40:36.868(1)? | │  └─ Meteor.startup at fixtures.js (imports/startup/server/fixtures.js:6:8) 5 ms (1)
+[app-2018-03-11 16:40:36.868] I20180311-16:40:36.868(1)? | └─ Run main()                                                     3 ms (1)
+[app-2018-03-11 16:40:36.868] I20180311-16:40:36.868(1)? | 
+[app-2018-03-11 16:40:36.868] I20180311-16:40:36.868(1)? | Top leaves:
+[app-2018-03-11 16:40:36.868] I20180311-16:40:36.868(1)? | require("combined-stream2")................................126 ms (2)
+[app-2018-03-11 16:40:36.868] I20180311-16:40:36.868(1)? | require("request").........................................120 ms (1)
+[app-2018-03-11 16:40:36.868] I20180311-16:40:36.868(1)? | 
+[app-2018-03-11 16:40:36.868] I20180311-16:40:36.868(1)? | (#1) Total: 756 ms (Server startup)
+[app-2018-03-11 16:40:36.868] I20180311-16:40:36.868(1)? | 
+[app-2018-03-11 16:40:36.869] => Meteor server restarted
