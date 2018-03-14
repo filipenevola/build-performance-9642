@@ -1,0 +1,113 @@
+[app-2018-03-11 18:15:32.722] | (#28) Profiling: ProjectContext prepareProjectForBuild
+[app-2018-03-11 18:15:32.722] For compatibility, the PACKAGE_DIRS environment variable is deprecated and will
+[app-2018-03-11 18:15:32.722] be removed in a future Meteor release.
+[app-2018-03-11 18:15:32.722] Developers should now use METEOR_PACKAGE_DIRS and Windows projects should now
+[app-2018-03-11 18:15:32.722] use a semi-colon (;) to separate paths.
+[app-2018-03-11 18:15:33.300] | 
+[app-2018-03-11 18:15:33.301] | ProjectContext prepareProjectForBuild...........................579 ms (1)
+[app-2018-03-11 18:15:33.301] | ├─ _initializeCatalog............................................18 ms (1)
+[app-2018-03-11 18:15:33.301] | │  └─ LocalCatalog#initialize....................................17 ms (1)
+[app-2018-03-11 18:15:33.301] | │     ├─ LocalCatalog#_computeEffectiveLocalPackages.............13 ms (1)
+[app-2018-03-11 18:15:33.301] | │     │  └─ optimistic hashOrNull                                12 ms (17)
+[app-2018-03-11 18:15:33.301] | │     └─ LocalCatalog#_loadLocalPackages..........................4 ms (1)
+[app-2018-03-11 18:15:33.301] | │        └─ PackageSource#initFromPackageDir......................3 ms (4)
+[app-2018-03-11 18:15:33.301] | │           ├─ sqlite query                                       1 ms (4)
+[app-2018-03-11 18:15:33.301] | │           └─ other PackageSource#initFromPackageDir             1 ms
+[app-2018-03-11 18:15:33.301] | ├─ _resolveConstraints...........................................47 ms (1)
+[app-2018-03-11 18:15:33.302] | │  ├─ Select Package Versions....................................29 ms (1)
+[app-2018-03-11 18:15:33.302] | │  │  └─ new CS.Input                                            29 ms (1)
+[app-2018-03-11 18:15:33.302] | │  └─ other _resolveConstraints                                  17 ms
+[app-2018-03-11 18:15:33.302] | ├─ _downloadMissingPackages......................................43 ms (1)
+[app-2018-03-11 18:15:33.302] | │  ├─ Isopack.readMetadataFromDirectory...........................8 ms (84)
+[app-2018-03-11 18:15:33.302] | │  │  ├─ files.stat                                               1 ms (84)
+[app-2018-03-11 18:15:33.302] | │  │  ├─ files.readFile                                           3 ms (84)
+[app-2018-03-11 18:15:33.302] | │  │  └─ other Isopack.readMetadataFromDirectory                  4 ms
+[app-2018-03-11 18:15:33.302] | │  └─ other _downloadMissingPackages                             35 ms
+[app-2018-03-11 18:15:33.302] | └─ _buildLocalPackages                                          471 ms (1)
+[app-2018-03-11 18:15:33.302] | 
+[app-2018-03-11 18:15:33.302] | Top leaves:
+[app-2018-03-11 18:15:33.303] | 
+[app-2018-03-11 18:15:33.303] | (#28) Total: 579 ms (ProjectContext prepareProjectForBuild)
+[app-2018-03-11 18:15:33.303] | 
+[app-2018-03-11 18:15:33.304] | (#29) Profiling: Rebuild App
+[app-2018-03-11 18:15:35.844] | 
+[app-2018-03-11 18:15:35.845] | Rebuild App...................................................2,540 ms (1)
+[app-2018-03-11 18:15:35.845] | └─ files.withCache............................................2,540 ms (1)
+[app-2018-03-11 18:15:35.845] |    ├─ compiler.compile(the app).................................248 ms (1)
+[app-2018-03-11 18:15:35.845] |    │  └─ files.withCache........................................248 ms (2)
+[app-2018-03-11 18:15:35.845] |    │     └─ compileUnibuild (the app)...........................248 ms (2)
+[app-2018-03-11 18:15:35.845] |    │        ├─ files.withCache...................................75 ms (2)
+[app-2018-03-11 18:15:35.846] |    │        │  ├─ files.realpath                                  1 ms (39)
+[app-2018-03-11 18:15:35.846] |    │        │  ├─ files.readdir                                   7 ms (78)
+[app-2018-03-11 18:15:35.846] |    │        │  ├─ files.stat                                     22 ms (1067)
+[app-2018-03-11 18:15:35.846] |    │        │  └─ other files.withCache                          45 ms
+[app-2018-03-11 18:15:35.846] |    │        ├─ files.readFile                                     1 ms (40)
+[app-2018-03-11 18:15:35.846] |    │        ├─ sha1                                               2 ms (40)
+[app-2018-03-11 18:15:35.846] |    │        ├─ optimistic readFile                                4 ms (2054)
+[app-2018-03-11 18:15:35.846] |    │        ├─ optimistic hashOrNull                             10 ms (2054)
+[app-2018-03-11 18:15:35.846] |    │        └─ other compileUnibuild (the app)                  154 ms
+[app-2018-03-11 18:15:35.846] |    ├─ bundler.bundle..makeClientTarget........................2,244 ms (1)
+[app-2018-03-11 18:15:35.846] |    │  └─ Target#make..........................................2,244 ms (1)
+[app-2018-03-11 18:15:35.846] |    │     ├─ Isopack#getUnibuildAtArch                             1 ms (806)
+[app-2018-03-11 18:15:35.846] |    │     ├─ Target#_runCompilerPlugins..........................522 ms (1)
+[app-2018-03-11 18:15:35.846] |    │     │  ├─ sha1                                               2 ms (98)
+[app-2018-03-11 18:15:35.846] |    │     │  ├─ Isopack#getUnibuildAtArch                          2 ms (783)
+[app-2018-03-11 18:15:35.846] |    │     │  ├─ plugin ecmascript................................496 ms (1)
+[app-2018-03-11 18:15:35.847] |    │     │  │  ├─ optimistic statOrNull                          39 ms (10351)
+[app-2018-03-11 18:15:35.847] |    │     │  │  ├─ Babel.compile                                  84 ms (1107)
+[app-2018-03-11 18:15:35.847] |    │     │  │  ├─ sha1                                            8 ms (1108)
+[app-2018-03-11 18:15:35.847] |    │     │  │  └─ other plugin ecmascript                       366 ms
+[app-2018-03-11 18:15:35.847] |    │     │  ├─ plugin templating-compiler                         2 ms (1)
+[app-2018-03-11 18:15:35.847] |    │     │  └─ other Target#_runCompilerPlugins                  19 ms
+[app-2018-03-11 18:15:35.847] |    │     ├─ Target#_emitResources.............................1,506 ms (1)
+[app-2018-03-11 18:15:35.847] |    │     │  ├─ PackageSourceBatch.computeJsOutputFilesMap.......507 ms (1)
+[app-2018-03-11 18:15:35.847] |    │     │  │  ├─ ImportScanner#_getAbsModuleId                  81 ms (11532)
+[app-2018-03-11 18:15:35.847] |    │     │  │  ├─ ImportScanner#_findImportedModuleIdentifiers    6 ms (11436)
+[app-2018-03-11 18:15:35.847] |    │     │  │  ├─ ImportScanner#_readFile.......................121 ms (10346)
+[app-2018-03-11 18:15:35.847] |    │     │  │  │  ├─ optimistic readFile                         27 ms (10346)
+[app-2018-03-11 18:15:35.847] |    │     │  │  │  ├─ optimistic hashOrNull                       13 ms (10346)
+[app-2018-03-11 18:15:35.847] |    │     │  │  │  └─ other ImportScanner#_readFile               81 ms
+[app-2018-03-11 18:15:35.847] |    │     │  │  └─ other PackageSourceBatch.computeJsOutputFilesMap 297 ms
+[app-2018-03-11 18:15:35.847] |    │     │  ├─ PackageSourceBatch#getResources..................983 ms (66)
+[app-2018-03-11 18:15:35.847] |    │     │  │  └─ PackageSourceBatch#_linkJS....................982 ms (66)
+[app-2018-03-11 18:15:35.847] |    │     │  │     ├─ sha1                                         6 ms (132)
+[app-2018-03-11 18:15:35.847] |    │     │  │     ├─ linker.fullLink............................837 ms (1)
+[app-2018-03-11 18:15:35.847] |    │     │  │     │  ├─ linker Module#getPrelinkedFiles.........764 ms (1)
+[app-2018-03-11 18:15:35.847] |    │     │  │     │  │  ├─ linker File#getPrelinkedOutput       358 ms (10344)
+[app-2018-03-11 18:15:35.847] |    │     │  │     │  │  ├─ getPrelinkedFiles toStringWithSourceMap 334 ms (1)
+[app-2018-03-11 18:15:35.847] |    │     │  │     │  │  └─ other linker Module#getPrelinkedFiles 72 ms
+[app-2018-03-11 18:15:35.847] |    │     │  │     │  ├─ linker Module#computeAssignedVariables...42 ms (1)
+[app-2018-03-11 18:15:35.847] |    │     │  │     │  │  ├─ linker File#computeAssignedVariables   6 ms (10344)
+[app-2018-03-11 18:15:35.847] |    │     │  │     │  │  └─ other linker Module#computeAssignedVariables 36 ms
+[app-2018-03-11 18:15:35.847] |    │     │  │     │  └─ other linker.fullLink                    31 ms
+[app-2018-03-11 18:15:35.848] |    │     │  │     ├─ files.rm_recursive                           2 ms (1)
+[app-2018-03-11 18:15:35.848] |    │     │  │     ├─ files.writeFileAtomically..................114 ms (1)
+[app-2018-03-11 18:15:35.848] |    │     │  │     │  └─ files.writeFile                         114 ms (1)
+[app-2018-03-11 18:15:35.848] |    │     │  │     └─ other PackageSourceBatch#_linkJS            23 ms
+[app-2018-03-11 18:15:35.848] |    │     │  └─ other Target#_emitResources                       17 ms
+[app-2018-03-11 18:15:35.848] |    │     ├─ Target#minifyJs                                     196 ms (1)
+[app-2018-03-11 18:15:35.848] |    │     ├─ sha1                                                 16 ms (136)
+[app-2018-03-11 18:15:35.848] |    │     └─ other Target#make                                     3 ms
+[app-2018-03-11 18:15:35.848] |    ├─ bundler writeTargetToPath..................................40 ms (1)
+[app-2018-03-11 18:15:35.848] |    │  └─ ClientTarget#write......................................39 ms (1)
+[app-2018-03-11 18:15:35.848] |    │     ├─ bundler writeFile....................................16 ms (72)
+[app-2018-03-11 18:15:35.848] |    │     │  └─ Builder#write.....................................16 ms (72)
+[app-2018-03-11 18:15:35.848] |    │     │     ├─ files.writeFile                                14 ms (1)
+[app-2018-03-11 18:15:35.848] |    │     │     └─ files.rename                                    1 ms (1)
+[app-2018-03-11 18:15:35.848] |    │     ├─ Builder#write.........................................2 ms (23)
+[app-2018-03-11 18:15:35.848] |    │     │  └─ sha1                                               1 ms (23)
+[app-2018-03-11 18:15:35.848] |    │     └─ other ClientTarget#write                             21 ms
+[app-2018-03-11 18:15:35.848] |    └─ other files.withCache                                       7 ms
+[app-2018-03-11 18:15:35.848] | 
+[app-2018-03-11 18:15:35.848] | Top leaves:
+[app-2018-03-11 18:15:35.849] | other plugin ecmascript....................................366 ms (1)
+[app-2018-03-11 18:15:35.849] | linker File#getPrelinkedOutput.............................358 ms (10344)
+[app-2018-03-11 18:15:35.849] | getPrelinkedFiles toStringWithSourceMap....................334 ms (1)
+[app-2018-03-11 18:15:35.849] | other PackageSourceBatch.computeJsOutputFilesMap...........297 ms (1)
+[app-2018-03-11 18:15:35.849] | Target#minifyJs............................................196 ms (1)
+[app-2018-03-11 18:15:35.849] | other compileUnibuild (the app)............................154 ms (2)
+[app-2018-03-11 18:15:35.849] | files.writeFile............................................128 ms (3)
+[app-2018-03-11 18:15:35.849] | 
+[app-2018-03-11 18:15:35.849] | (#29) Total: 2,540 ms (Rebuild App)
+[app-2018-03-11 18:15:35.849] | 
+=> Client modified -- refreshing (x3)

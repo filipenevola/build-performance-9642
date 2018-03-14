@@ -14,8 +14,8 @@ for i in `seq 1 $appFiles`;
         done
 echo "" > "../../imports/index.js"
 echo "import { x1 } from './fake';" >> "../../imports/index.js"
-echo "import { x1 as xA } from 'meteor/a';" >> "../../imports/index.js"
-echo "import { x1 as xB } from 'meteor/b';" >> "../../imports/index.js"
+echo "import { x1 as xA } from 'a';" >> "../../imports/index.js"
+echo "import { x1 as xB } from 'b';" >> "../../imports/index.js"
 
 packageASrc=../../packages/a/src
 # Package #A level file generator
@@ -28,7 +28,7 @@ for i in `seq 1 $packageAFiles`;
         done
 echo "" > "$packageASrc/index.js"
 echo "import { x1 } from './fake';" >> "$packageASrc/index.js"
-echo "import { x1 as x1B } from 'meteor/b';" >> "$packageASrc/index.js"
+echo "import { x1 as x1B } from 'b';" >> "$packageASrc/index.js"
 
 packageBSrc=../../packages/b/src
 # Package #B level file generator

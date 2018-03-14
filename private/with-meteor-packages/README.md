@@ -8,24 +8,33 @@ The structure of the app in terms of dependencies are:
 
 ``` bash
 app
-  - package a
-     - package b
-  - package b
+  - Meteor package a
+     - Meteor package b
+  - Meteor package b
 ```
+
+- Expose the "src" folder as the main entry point of the packages.
+- Describe the modules using ES6 within the "src" folder.
+- Ignore "dist" folder as Meteor resolves ES6 on the packages.
 
 ## Setup
 
-To get ready the environment to perform the experiment, use the `fakeFiles.sh` script, which populates of modules the app and packages by the given input.
-
-``` shell
-./fakeFiles <n-app-files> <n-package-a-files> <n-package-b-files>
-```
-
-Then the meteor app is run and profiles are generated to measure the times on load and rebuild the app.
+To get ready the environment to perform the experiment, you first have to bootstrap the app by running the next command.
 
 ``` bash
-export METEOR_PROFILE=1 # tell the meteor builder to output the profiles logs
-yarn start # start the app
+./bootstrap.sh
+```
+
+ The packages will be integrated in the app as meteor packages. Then, use the `fakeFiles.sh` script, which populates of modules the app and packages by the given input.
+
+``` shell
+./fakeFiles.sh <n-app-files> <n-package-a-files> <n-package-b-files>
+```
+
+Then the meteor app can be run and profiles are generated to measure the times on load and rebuild the app.
+
+``` bash
+./start.sh
 ```
 
 Sometimes, when testing with large amount of files you may get your Meteor app instance lagged on rebuild. It consumes so many memory resources, to overcome this issue you can expand your memory available for the node processes by running:
@@ -64,7 +73,7 @@ The results are available on `logs/` folder, but the next table sums it up and s
 | 11 |    1000   |       5000       |       5000       |    p#A    |     6,188    |    5,443   |      633      | 12264 |
 | 12 |    1000   |       5000       |       5000       |    p#B    |     6,351    |    5,235   |      620      | 12206 |
 
-> Note: The times collected are happen on code change with meteor cached.
+> Note: The times showed in the table above correspond to the times on code change with meteor cached.
 
 ### Analysis
 
