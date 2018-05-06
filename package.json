@@ -14,14 +14,14 @@
     "packages/*"
   ],
   "dependencies": {
-    "@babel/runtime": "^7.0.0-beta.40",
+    "@babel/runtime": "^7.0.0-beta.46",
     "meteor-node-stubs": "^0.3.3"
   },
   "devDependencies": {
-    "@babel/cli": "^7.0.0-beta.40",
-    "@babel/core": "^7.0.0-beta.40",
-    "@babel/preset-env": "^7.0.0-beta.40",
-    "babel-preset-meteor": "^7.0.0-beta.40-1",
+    "@babel/cli": "^7.0.0-beta.46",
+    "@babel/core": "^7.0.0-beta.46",
+    "@babel/preset-env": "^7.0.0-beta.46",
+    "babel-preset-meteor": "^7.0.0-beta.46-1",
     "chai": "^4.1.2",
     "concurrently": "^3.5.1",
     "lerna": "^2.9.0"
