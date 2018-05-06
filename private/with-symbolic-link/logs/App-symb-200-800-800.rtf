@@ -1,0 +1,539 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1561\cocoasubrtf400
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset134 PingFangSC-Regular;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 | (#4) Profiling: ProjectContext prepareProjectForBuild\
+|  Preparing project                         /\
+| ProjectContext prepareProjectForBuild...........................937 ms (1)\
+| 
+\f1 \'a9\'c0
+\f0 \uc0\u9472  _initializeCatalog............................................92 ms (1)\
+| \uc0\u9474   \u9492 \u9472  LocalCatalog#initialize....................................92 ms (1)\
+| \uc0\u9474      \u9492 \u9472  addPatternsToList                                       91 ms (2)\
+| 
+\f1 \'a9\'c0
+\f0 \uc0\u9472  _resolveConstraints...........................................13 ms (1)\
+| \uc0\u9474   
+\f1 \'a9\'c0
+\f0 \uc0\u9472  Select Package Versions.....................................6 ms (1)\
+| \uc0\u9474   \u9474   \u9492 \u9472  new CS.Input                                             6 ms (1)\
+| \uc0\u9474   \u9492 \u9472  other _resolveConstraints                                   6 ms\
+| 
+\f1 \'a9\'c0
+\f0 \uc0\u9472  _downloadMissingPackages.....................................248 ms (1)\
+| \uc0\u9474   
+\f1 \'a9\'c0
+\f0 \uc0\u9472  Isopack.readMetadataFromDirectory..........................47 ms (86)\
+| \uc0\u9474   \u9474   
+\f1 \'a9\'c0
+\f0 \uc0\u9472  files.stat                                               2 ms (86)\
+| \uc0\u9474   \u9474   
+\f1 \'a9\'c0
+\f0 \uc0\u9472  files.readFile                                          41 ms (86)\
+| \uc0\u9474   \u9474   \u9492 \u9472  other Isopack.readMetadataFromDirectory                  3 ms\
+| \uc0\u9474   \u9492 \u9472  other _downloadMissingPackages                            201 ms\
+| 
+\f1 \'a9\'c0
+\f0 \uc0\u9472  _buildLocalPackages..........................................581 ms (1)\
+| \uc0\u9474   
+\f1 \'a9\'c0
+\f0 \uc0\u9472  IsopackCache Load local isopack                             1 ms (86)\
+| \uc0\u9474   \u9492 \u9472  other _buildLocalPackages                                 580 ms\
+| \uc0\u9492 \u9472  _saveChangedMetadata                                           3 ms (1)\
+| \
+| Top leaves:\
+| other _buildLocalPackages..................................580 ms (1)\
+| other _downloadMissingPackages.............................201 ms (1)\
+| \
+| (#4) Total: 937 ms (ProjectContext prepareProjectForBuild)\
+| \
+| (#5) Profiling: Rebuild App\
+|                                            \\\
+| Rebuild App...................................................4,476 ms (1)\
+| \uc0\u9492 \u9472  files.withCache............................................4,476 ms (1)\
+|    
+\f1 \'a9\'c0
+\f0 \uc0\u9472  compiler.compile(the app)...............................1,473 ms (1)\
+|    \uc0\u9474   \u9492 \u9472  files.withCache......................................1,473 ms (2)\
+|    \uc0\u9474      \u9492 \u9472  compileUnibuild (the app).........................1,473 ms (2)\
+|    \uc0\u9474         
+\f1 \'a9\'c0
+\f0 \uc0\u9472  files.withCache..................................463 ms (2)\
+|    \uc0\u9474         \u9474   
+\f1 \'a9\'c0
+\f0 \uc0\u9472  files.realpath                                  5 ms (49)\
+|    \uc0\u9474         \u9474   
+\f1 \'a9\'c0
+\f0 \uc0\u9472  files.readdir                                  15 ms (98)\
+|    \uc0\u9474         \u9474   
+\f1 \'a9\'c0
+\f0 \uc0\u9472  files.stat                                     38 ms (1875)\
+|    \uc0\u9474         \u9474   \u9492 \u9472  other files.withCache                         405 ms\
+|    \uc0\u9474         
+\f1 \'a9\'c0
+\f0 \uc0\u9472  files.readFile                                     4 ms (56)\
+|    \uc0\u9474         
+\f1 \'a9\'c0
+\f0 \uc0\u9472  sha1                                               2 ms (56)\
+|    \uc0\u9474         
+\f1 \'a9\'c0
+\f0 \uc0\u9472  optimistic readFile                               42 ms (3658)\
+|    \uc0\u9474         
+\f1 \'a9\'c0
+\f0 \uc0\u9472  optimistic hashOrNull                              6 ms (3658)\
+|    \uc0\u9474         \u9492 \u9472  other compileUnibuild (the app)                  954 ms\
+|    
+\f1 \'a9\'c0
+\f0 \uc0\u9472  bundler.bundle..makeClientTarget........................1,608 ms (1)\
+|    \uc0\u9474   \u9492 \u9472  Target#make..........................................1,607 ms (1)\
+|    \uc0\u9474      
+\f1 \'a9\'c0
+\f0 \uc0\u9472  Isopack#getUnibuildAtArch                             3 ms (820)\
+|    \uc0\u9474      
+\f1 \'a9\'c0
+\f0 \uc0\u9472  Target#_runCompilerPlugins..........................924 ms (1)\
+|    \uc0\u9474      \u9474   
+\f1 \'a9\'c0
+\f0 \uc0\u9472  sha1                                               2 ms (97)\
+|    \uc0\u9474      \u9474   
+\f1 \'a9\'c0
+\f0 \uc0\u9472  Isopack#getUnibuildAtArch                          3 ms (797)\
+|    \uc0\u9474      \u9474   
+\f1 \'a9\'c0
+\f0 \uc0\u9472  plugin ecmascript................................880 ms (1)\
+|    \uc0\u9474      \u9474   \u9474   
+\f1 \'a9\'c0
+\f0 \uc0\u9472  optimistic statOrNull                          47 ms (21682)\
+|    \uc0\u9474      \u9474   \u9474   
+\f1 \'a9\'c0
+\f0 \uc0\u9472  Babel.compile                                 124 ms (1912)\
+|    \uc0\u9474      \u9474   \u9474   
+\f1 \'a9\'c0
+\f0 \uc0\u9472  sha1                                            9 ms (1913)\
+|    \uc0\u9474      \u9474   \u9474   \u9492 \u9472  other plugin ecmascript                       699 ms\
+|    \uc0\u9474      \u9474   
+\f1 \'a9\'c0
+\f0 \uc0\u9472  plugin templating-compiler                         2 ms (1)\
+|    \uc0\u9474      \u9474   \u9492 \u9472  other Target#_runCompilerPlugins                  35 ms\
+|    \uc0\u9474      
+\f1 \'a9\'c0
+\f0 \uc0\u9472  Target#_emitResources...............................642 ms (1)\
+|    \uc0\u9474      \u9474   
+\f1 \'a9\'c0
+\f0 \uc0\u9472  PackageSourceBatch.computeJsOutputFilesMap.......118 ms (1)\
+|    \uc0\u9474      \u9474   \u9474   
+\f1 \'a9\'c0
+\f0 \uc0\u9472  ImportScanner#_getAbsModuleId                  32 ms (2346)\
+|    \uc0\u9474      \u9474   \u9474   
+\f1 \'a9\'c0
+\f0 \uc0\u9472  ImportScanner#_findImportedModuleIdentifiers    5 ms (2250)\
+|    \uc0\u9474      \u9474   \u9474   
+\f1 \'a9\'c0
+\f0 \uc0\u9472  ImportScanner#_readFile                         3 ms (355)\
+|    \uc0\u9474      \u9474   \u9474   \u9492 \u9472  other PackageSourceBatch.computeJsOutputFilesMap 77 ms\
+|    \uc0\u9474      \u9474   
+\f1 \'a9\'c0
+\f0 \uc0\u9472  PackageSourceBatch#getResources..................522 ms (66)\
+|    \uc0\u9474      \u9474   \u9474   \u9492 \u9472  PackageSourceBatch#_linkJS....................522 ms (66)\
+|    \uc0\u9474      \u9474   \u9474      
+\f1 \'a9\'c0
+\f0 \uc0\u9472  sha1                                         1 ms (132)\
+|    \uc0\u9474      \u9474   \u9474      
+\f1 \'a9\'c0
+\f0 \uc0\u9472  linker.fullLink............................468 ms (1)\
+|    \uc0\u9474      \u9474   \u9474      \u9474   
+\f1 \'a9\'c0
+\f0 \uc0\u9472  linker Module#getPrelinkedFiles.........464 ms (1)\
+|    \uc0\u9474      \u9474   \u9474      \u9474   \u9474   
+\f1 \'a9\'c0
+\f0 \uc0\u9472  linker File#getPrelinkedOutput       225 ms (1826)\
+|    \uc0\u9474      \u9474   \u9474      \u9474   \u9474   
+\f1 \'a9\'c0
+\f0 \uc0\u9472  getPrelinkedFiles toStringWithSourceMap 218 ms (1)\
+|    \uc0\u9474      \u9474   \u9474      \u9474   \u9474   \u9492 \u9472  other linker Module#getPrelinkedFiles 22 ms\
+|    \uc0\u9474      \u9474   \u9474      \u9474   \u9492 \u9472  other linker.fullLink                     4 ms\
+|    \uc0\u9474      \u9474   \u9474      
+\f1 \'a9\'c0
+\f0 \uc0\u9472  files.rm_recursive                           2 ms (1)\
+|    \uc0\u9474      \u9474   \u9474      
+\f1 \'a9\'c0
+\f0 \uc0\u9472  files.writeFileAtomically...................12 ms (1)\
+|    \uc0\u9474      \u9474   \u9474      \u9474   \u9492 \u9472  files.writeFile                          12 ms (1)\
+|    \uc0\u9474      \u9474   \u9474      \u9492 \u9472  other PackageSourceBatch#_linkJS            38 ms\
+|    \uc0\u9474      \u9474   \u9492 \u9472  other Target#_emitResources                        2 ms\
+|    \uc0\u9474      
+\f1 \'a9\'c0
+\f0 \uc0\u9472  Target#minifyJs                                      28 ms (1)\
+|    \uc0\u9474      
+\f1 \'a9\'c0
+\f0 \uc0\u9472  sha1                                                  4 ms (136)\
+|    \uc0\u9474      \u9492 \u9472  other Target#make                                     5 ms\
+|    
+\f1 \'a9\'c0
+\f0 \uc0\u9472  bundler.bundle..makeServerTarget..........................816 ms (1)\
+|    \uc0\u9474   \u9492 \u9472  Target#make............................................816 ms (1)\
+|    \uc0\u9474      
+\f1 \'a9\'c0
+\f0 \uc0\u9472  Isopack#getUnibuildAtArch                             2 ms (975)\
+|    \uc0\u9474      
+\f1 \'a9\'c0
+\f0 \uc0\u9472  Target#_runCompilerPlugins..........................754 ms (1)\
+|    \uc0\u9474      \u9474   
+\f1 \'a9\'c0
+\f0 \uc0\u9472  sha1                                               1 ms (93)\
+|    \uc0\u9474      \u9474   
+\f1 \'a9\'c0
+\f0 \uc0\u9472  Isopack#getUnibuildAtArch                          3 ms (969)\
+|    \uc0\u9474      \u9474   
+\f1 \'a9\'c0
+\f0 \uc0\u9472  plugin ecmascript................................726 ms (1)\
+|    \uc0\u9474      \u9474   \u9474   
+\f1 \'a9\'c0
+\f0 \uc0\u9472  optimistic statOrNull                          37 ms (21721)\
+|    \uc0\u9474      \u9474   \u9474   
+\f1 \'a9\'c0
+\f0 \uc0\u9472  Babel.compile                                  63 ms (1938)\
+|    \uc0\u9474      \u9474   \u9474   
+\f1 \'a9\'c0
+\f0 \uc0\u9472  sha1                                            7 ms (1939)\
+|    \uc0\u9474      \u9474   \u9474   \u9492 \u9472  other plugin ecmascript                       619 ms\
+|    \uc0\u9474      \u9474   \u9492 \u9472  other Target#_runCompilerPlugins                  23 ms\
+|    \uc0\u9474      
+\f1 \'a9\'c0
+\f0 \uc0\u9472  Target#_emitResources................................56 ms (1)\
+|    \uc0\u9474      \u9474   
+\f1 \'a9\'c0
+\f0 \uc0\u9472  PackageSourceBatch.computeJsOutputFilesMap........51 ms (1)\
+|    \uc0\u9474      \u9474   \u9474   
+\f1 \'a9\'c0
+\f0 \uc0\u9472  ImportScanner#_getAbsModuleId                  14 ms (2010)\
+|    \uc0\u9474      \u9474   \u9474   \u9492 \u9472  other PackageSourceBatch.computeJsOutputFilesMap 36 ms\
+|    \uc0\u9474      \u9474   
+\f1 \'a9\'c0
+\f0 \uc0\u9472  PackageSourceBatch#getResources....................3 ms (73)\
+|    \uc0\u9474      \u9474   \u9474   \u9492 \u9472  PackageSourceBatch#_linkJS                      2 ms (73)\
+|    \uc0\u9474      \u9474   \u9492 \u9472  other Target#_emitResources                        2 ms\
+|    \uc0\u9474      \u9492 \u9472  other Target#make                                     4 ms\
+|    
+\f1 \'a9\'c0
+\f0 \uc0\u9472  bundler writeSiteArchive..................................575 ms (1)\
+|    \uc0\u9474   
+\f1 \'a9\'c0
+\f0 \uc0\u9472  bundler writeTargetToPath..............................573 ms (2)\
+|    \uc0\u9474   \u9474   
+\f1 \'a9\'c0
+\f0 \uc0\u9472  ClientTarget#write...................................30 ms (1)\
+|    \uc0\u9474   \u9474   \u9474   
+\f1 \'a9\'c0
+\f0 \uc0\u9472  bundler writeFile..................................2 ms (72)\
+|    \uc0\u9474   \u9474   \u9474   \u9474   \u9492 \u9472  Builder#write                                   2 ms (72)\
+|    \uc0\u9474   \u9474   \u9474   
+\f1 \'a9\'c0
+\f0 \uc0\u9472  Builder#write......................................3 ms (24)\
+|    \uc0\u9474   \u9474   \u9474   \u9474   \u9492 \u9472  sha1                                            2 ms (24)\
+|    \uc0\u9474   \u9474   \u9474   \u9492 \u9472  other ClientTarget#write                          25 ms\
+|    \uc0\u9474   \u9474   \u9492 \u9472  ServerTarget#write..................................543 ms (1)\
+|    \uc0\u9474   \u9474      
+\f1 \'a9\'c0
+\f0 \uc0\u9472  Builder#write......................................6 ms (12)\
+|    \uc0\u9474   \u9474      \u9474   \u9492 \u9472  files.readFile                                  4 ms (10)\
+|    \uc0\u9474   \u9474      \u9492 \u9472  JsImage#write....................................535 ms (1)\
+|    \uc0\u9474   \u9474         
+\f1 \'a9\'c0
+\f0 \uc0\u9472  Builder#write..................................16 ms (145)\
+|    \uc0\u9474   \u9474         \u9474   
+\f1 \'a9\'c0
+\f0 \uc0\u9472  sha1                                        14 ms (145)\
+|    \uc0\u9474   \u9474         \u9474   \u9492 \u9472  other Builder#write                          1 ms\
+|    \uc0\u9474   \u9474         
+\f1 \'a9\'c0
+\f0 \uc0\u9472  sha1                                            3 ms (108)\
+|    \uc0\u9474   \u9474         
+\f1 \'a9\'c0
+\f0 \uc0\u9472  meteorNpm.isPortable..........................429 ms (23)\
+|    \uc0\u9474   \u9474         \u9474   
+\f1 \'a9\'c0
+\f0 \uc0\u9472  meteorNpm.isPortable.......................418 ms (664)\
+|    \uc0\u9474   \u9474         \u9474   \u9474   
+\f1 \'a9\'c0
+\f0 \uc0\u9472  optimistic lstat                          7 ms (664)\
+|    \uc0\u9474   \u9474         \u9474   \u9474   
+\f1 \'a9\'c0
+\f0 \uc0\u9472  optimistic statOrNull                     3 ms (661)\
+|    \uc0\u9474   \u9474         \u9474   \u9474   
+\f1 \'a9\'c0
+\f0 \uc0\u9472  optimistic readJsonOrNull...............323 ms (659)\
+|    \uc0\u9474   \u9474         \u9474   \u9474   \u9474   
+\f1 \'a9\'c0
+\f0 \uc0\u9472  optimistic readFile..................302 ms (659)\
+|    \uc0\u9474   \u9474         \u9474   \u9474   \u9474   \u9474   
+\f1 \'a9\'c0
+\f0 \uc0\u9472  files.readFile                    282 ms (659)\
+|    \uc0\u9474   \u9474         \u9474   \u9474   \u9474   \u9474   \u9492 \u9472  other optimistic readFile          20 ms\
+|    \uc0\u9474   \u9474         \u9474   \u9474   \u9474   \u9492 \u9472  other optimistic readJsonOrNull       21 ms\
+|    \uc0\u9474   \u9474         \u9474   \u9474   
+\f1 \'a9\'c0
+\f0 \uc0\u9472  meteorNpm.isPortable.....................69 ms (133)\
+|    \uc0\u9474   \u9474         \u9474   \u9474   \u9474   
+\f1 \'a9\'c0
+\f0 \uc0\u9472  optimistic lstat                       2 ms (133)\
+|    \uc0\u9474   \u9474         \u9474   \u9474   \u9474   
+\f1 \'a9\'c0
+\f0 \uc0\u9472  optimistic readJsonOrNull.............63 ms (133)\
+|    \uc0\u9474   \u9474         \u9474   \u9474   \u9474   \u9474   
+\f1 \'a9\'c0
+\f0 \uc0\u9472  optimistic readFile................58 ms (133)\
+|    \uc0\u9474   \u9474         \u9474   \u9474   \u9474   \u9474   \u9474   
+\f1 \'a9\'c0
+\f0 \uc0\u9472  files.readFile                  55 ms (133)\
+|    \uc0\u9474   \u9474         \u9474   \u9474   \u9474   \u9474   \u9474   \u9492 \u9472  other optimistic readFile        3 ms\
+|    \uc0\u9474   \u9474         \u9474   \u9474   \u9474   \u9474   \u9492 \u9472  other optimistic readJsonOrNull     5 ms\
+|    \uc0\u9474   \u9474         \u9474   \u9474   \u9474   \u9492 \u9472  other meteorNpm.isPortable             3 ms\
+|    \uc0\u9474   \u9474         \u9474   \u9474   \u9492 \u9472  other meteorNpm.isPortable               16 ms\
+|    \uc0\u9474   \u9474         \u9474   \u9492 \u9472  other meteorNpm.isPortable                  10 ms\
+|    \uc0\u9474   \u9474         
+\f1 \'a9\'c0
+\f0 \uc0\u9472  Builder#copyDirectory..........................53 ms (23)\
+|    \uc0\u9474   \u9474         \u9474   
+\f1 \'a9\'c0
+\f0 \uc0\u9472  files.realpath                               2 ms (23)\
+|    \uc0\u9474   \u9474         \u9474   
+\f1 \'a9\'c0
+\f0 \uc0\u9472  files.symlink                               12 ms (190)\
+|    \uc0\u9474   \u9474         \u9474   
+\f1 \'a9\'c0
+\f0 \uc0\u9472  files.rm_recursive                          28 ms (95)\
+|    \uc0\u9474   \u9474         \u9474   
+\f1 \'a9\'c0
+\f0 \uc0\u9472  optimistic lstatOrNull                       1 ms (473)\
+|    \uc0\u9474   \u9474         \u9474   \u9492 \u9472  other Builder#copyDirectory                  8 ms\
+|    \uc0\u9474   \u9474         \u9492 \u9472  other JsImage#write                            34 ms\
+|    \uc0\u9474   \u9492 \u9472  other bundler writeSiteArchive                           1 ms\
+|    \uc0\u9492 \u9472  other files.withCache                                       2 ms\
+| \
+| Top leaves:\
+| other plugin ecmascript..................................1,318 ms (2)\
+| other compileUnibuild (the app)............................954 ms (2)\
+| other files.withCache......................................407 ms (5)\
+| files.readFile.............................................346 ms (864)\
+| linker File#getPrelinkedOutput.............................225 ms (1826)\
+| getPrelinkedFiles toStringWithSourceMap....................218 ms (1)\
+| Babel.compile..............................................187 ms (3850)\
+| other PackageSourceBatch.computeJsOutputFilesMap...........113 ms (2)\
+| \
+| (#5) Total: 4,476 ms (Rebuild App)\
+| \
+I20180506-11:20:18.189(-5)? | (#1) Profiling: Server startup\
+I20180506-11:20:18.493(-5)? | \
+I20180506-11:20:18.498(-5)? | Server startup..................................................814 ms (1)\
+I20180506-11:20:18.499(-5)? | 
+\f1 \'a9\'c0
+\f0 \uc0\u9472  Load server bundles..........................................804 ms (1)\
+I20180506-11:20:18.499(-5)? | \uc0\u9474   
+\f1 \'a9\'c0
+\f0 \uc0\u9472  packages/meteor.js..........................................5 ms (1)\
+I20180506-11:20:18.499(-5)? | \uc0\u9474   \u9474   
+\f1 \'a9\'c0
+\f0 \uc0\u9472  Npm.require("fibers/future")                             1 ms (2)\
+I20180506-11:20:18.499(-5)? | \uc0\u9474   \u9474   
+\f1 \'a9\'c0
+\f0 \uc0\u9472  Npm.require("meteor-deque")                              2 ms (1)\
+I20180506-11:20:18.500(-5)? | \uc0\u9474   \u9474   \u9492 \u9472  other packages/meteor.js                                 2 ms\
+I20180506-11:20:18.500(-5)? | \uc0\u9474   
+\f1 \'a9\'c0
+\f0 \uc0\u9472  packages/npm-mongo.js......................................91 ms (1)\
+I20180506-11:20:18.500(-5)? | \uc0\u9474   \u9474   \u9492 \u9472  Npm.require("mongodb")                                  91 ms (1)\
+I20180506-11:20:18.500(-5)? | \uc0\u9474   
+\f1 \'a9\'c0
+\f0 \uc0\u9472  packages/modules.js.........................................4 ms (1)\
+I20180506-11:20:18.500(-5)? | \uc0\u9474   \u9474   \u9492 \u9472  require("/node_modules/meteor/modules/server.js")........3 ms (1)\
+I20180506-11:20:18.500(-5)? | \uc0\u9474   \u9474      \u9492 \u9472  require("./reify.js").................................2 ms (1)\
+I20180506-11:20:18.500(-5)? | \uc0\u9474   \u9474         \u9492 \u9472  require("reify/lib/runtime")                       1 ms (1)\
+I20180506-11:20:18.500(-5)? | \uc0\u9474   
+\f1 \'a9\'c0
+\f0 \uc0\u9472  packages/ecmascript-runtime-server.js......................11 ms (1)\
+I20180506-11:20:18.500(-5)? | \uc0\u9474   \u9474   \u9492 \u9472  require("/node_modules/meteor/ecmascript-runtime-server/runtime.js").11 ms (1)\
+I20180506-11:20:18.501(-5)? | \uc0\u9474   \u9474      \u9492 \u9472  require("core-js/modules/es7.string.pad-start")      10 ms (1)\
+I20180506-11:20:18.501(-5)? | \uc0\u9474   
+\f1 \'a9\'c0
+\f0 \uc0\u9472  packages/babel-compiler.js..................................3 ms (1)\
+I20180506-11:20:18.501(-5)? | \uc0\u9474   \u9474   \u9492 \u9472  Npm.require("semver")                                    2 ms (1)\
+I20180506-11:20:18.501(-5)? | \uc0\u9474   
+\f1 \'a9\'c0
+\f0 \uc0\u9472  packages/babel-runtime.js...................................1 ms (1)\
+I20180506-11:20:18.501(-5)? | \uc0\u9474   \u9474   \u9492 \u9472  require("/node_modules/meteor/babel-runtime/babel-runtime.js") 1 ms (1)\
+I20180506-11:20:18.501(-5)? | \uc0\u9474   
+\f1 \'a9\'c0
+\f0 \uc0\u9472  packages/promise.js.........................................3 ms (1)\
+I20180506-11:20:18.501(-5)? | \uc0\u9474   \u9474   \u9492 \u9472  require("/node_modules/meteor/promise/server.js")........2 ms (1)\
+I20180506-11:20:18.502(-5)? | \uc0\u9474   \u9474      \u9492 \u9472  require("meteor-promise")                             2 ms (1)\
+I20180506-11:20:18.502(-5)? | \uc0\u9474   
+\f1 \'a9\'c0
+\f0 \uc0\u9472  packages/http.js..........................................164 ms (1)\
+I20180506-11:20:18.502(-5)? | \uc0\u9474   \u9474   \u9492 \u9472  require("/node_modules/meteor/http/httpcall_server.js").164 ms (1)\
+I20180506-11:20:18.502(-5)? | \uc0\u9474   \u9474      \u9492 \u9472  require("request")                                  163 ms (1)\
+I20180506-11:20:18.502(-5)? | \uc0\u9474   
+\f1 \'a9\'c0
+\f0 \uc0\u9472  packages/dynamic-import.js..................................7 ms (1)\
+I20180506-11:20:18.502(-5)? | \uc0\u9474   \u9474   \u9492 \u9472  require("/node_modules/meteor/dynamic-import/server.js").6 ms (1)\
+I20180506-11:20:18.503(-5)? | \uc0\u9474   \u9474      
+\f1 \'a9\'c0
+\f0 \uc0\u9472  require("./security.js")                              4 ms (1)\
+I20180506-11:20:18.503(-5)? | \uc0\u9474   \u9474      \u9492 \u9472  other require("/node_modules/meteor/dynamic-import/server.js") 1 ms\
+I20180506-11:20:18.503(-5)? | \uc0\u9474   
+\f1 \'a9\'c0
+\f0 \uc0\u9472  packages/random.js..........................................1 ms (1)\
+I20180506-11:20:18.503(-5)? | \uc0\u9474   \u9474   \u9492 \u9472  require("/node_modules/meteor/random/random.js")         1 ms (1)\
+I20180506-11:20:18.503(-5)? | \uc0\u9474   
+\f1 \'a9\'c0
+\f0 \uc0\u9472  packages/mongo-id.js                                        1 ms (1)\
+I20180506-11:20:18.504(-5)? | \uc0\u9474   
+\f1 \'a9\'c0
+\f0 \uc0\u9472  packages/minimongo.js.......................................6 ms (1)\
+I20180506-11:20:18.504(-5)? | \uc0\u9474   \u9474   \u9492 \u9472  require("/node_modules/meteor/minimongo/minimongo_server.js").6 ms (1)\
+I20180506-11:20:18.504(-5)? | \uc0\u9474   \u9474      \u9492 \u9472  require("./minimongo_common.js")......................5 ms (1)\
+I20180506-11:20:18.505(-5)? | \uc0\u9474   \u9474         \u9492 \u9472  require("./local_collection.js")...................4 ms (1)\
+I20180506-11:20:18.505(-5)? | \uc0\u9474   \u9474            
+\f1 \'a9\'c0
+\f0 \uc0\u9472  require("./cursor.js")..........................2 ms (1)\
+I20180506-11:20:18.505(-5)? | \uc0\u9474   \u9474            \u9474   \u9492 \u9472  require("./common.js")                       1 ms (1)\
+I20180506-11:20:18.506(-5)? | \uc0\u9474   \u9474            \u9492 \u9472  other require("./local_collection.js")          2 ms\
+I20180506-11:20:18.506(-5)? | \uc0\u9474   
+\f1 \'a9\'c0
+\f0 \uc0\u9472  packages/check.js...........................................1 ms (1)\
+I20180506-11:20:18.506(-5)? | \uc0\u9474   \u9474   \u9492 \u9472  require("/node_modules/meteor/check/match.js")           1 ms (1)\
+I20180506-11:20:18.506(-5)? | \uc0\u9474   
+\f1 \'a9\'c0
+\f0 \uc0\u9472  packages/ddp-client.js......................................5 ms (1)\
+I20180506-11:20:18.506(-5)? | \uc0\u9474   \u9474   \u9492 \u9472  require("/node_modules/meteor/ddp-client/server/server.js").5 ms (1)\
+I20180506-11:20:18.506(-5)? | \uc0\u9474   \u9474      \u9492 \u9472  require("../common/namespace.js").....................5 ms (1)\
+I20180506-11:20:18.507(-5)? | \uc0\u9474   \u9474         \u9492 \u9472  require("./livedata_connection.js")                4 ms (1)\
+I20180506-11:20:18.508(-5)? | \uc0\u9474   
+\f1 \'a9\'c0
+\f0 \uc0\u9472  packages/underscore.js                                      1 ms (1)\
+I20180506-11:20:18.508(-5)? | \uc0\u9474   
+\f1 \'a9\'c0
+\f0 \uc0\u9472  packages/boilerplate-generator.js..........................76 ms (1)\
+I20180506-11:20:18.508(-5)? | \uc0\u9474   \u9474   \u9492 \u9472  require("/node_modules/meteor/boilerplate-generator/generator.js").76 ms (1)\
+I20180506-11:20:18.508(-5)? | \uc0\u9474   \u9474      \u9492 \u9472  require("combined-stream2")                          74 ms (1)\
+I20180506-11:20:18.508(-5)? | \uc0\u9474   
+\f1 \'a9\'c0
+\f0 \uc0\u9472  packages/webapp.js........................................107 ms (1)\
+I20180506-11:20:18.508(-5)? | \uc0\u9474   \u9474   \u9492 \u9472  require("/node_modules/meteor/webapp/webapp_server.js").107 ms (1)\
+I20180506-11:20:18.509(-5)? | \uc0\u9474   \u9474      
+\f1 \'a9\'c0
+\f0 \uc0\u9472  require("./connect.js")..............................13 ms (1)\
+I20180506-11:20:18.509(-5)? | \uc0\u9474   \u9474      \u9474   \u9492 \u9472  require("connect")                                12 ms (1)\
+I20180506-11:20:18.509(-5)? | \uc0\u9474   \u9474      
+\f1 \'a9\'c0
+\f0 \uc0\u9472  require("compression")                               13 ms (1)\
+I20180506-11:20:18.509(-5)? | \uc0\u9474   \u9474      
+\f1 \'a9\'c0
+\f0 \uc0\u9472  require("cookie-parser")                              2 ms (1)\
+I20180506-11:20:18.509(-5)? | \uc0\u9474   \u9474      
+\f1 \'a9\'c0
+\f0 \uc0\u9472  require("qs-middleware")                              4 ms (1)\
+I20180506-11:20:18.509(-5)? | \uc0\u9474   \u9474      
+\f1 \'a9\'c0
+\f0 \uc0\u9472  require("useragent")                                 15 ms (1)\
+I20180506-11:20:18.510(-5)? | \uc0\u9474   \u9474      
+\f1 \'a9\'c0
+\f0 \uc0\u9472  require("send")                                      13 ms (1)\
+I20180506-11:20:18.510(-5)? | \uc0\u9474   \u9474      \u9492 \u9472  other require("/node_modules/meteor/webapp/webapp_server.js") 45 ms\
+I20180506-11:20:18.510(-5)? | \uc0\u9474   
+\f1 \'a9\'c0
+\f0 \uc0\u9472  packages/ddp-server.js.....................................69 ms (1)\
+I20180506-11:20:18.510(-5)? | \uc0\u9474   \u9474   
+\f1 \'a9\'c0
+\f0 \uc0\u9472  require("/node_modules/meteor/ddp-server/livedata_server.js") 2 ms (1)\
+I20180506-11:20:18.510(-5)? | \uc0\u9474   \u9474   \u9492 \u9472  require("/node_modules/meteor/ddp-server/server_convenience.js").66 ms (1)\
+I20180506-11:20:18.511(-5)? | \uc0\u9474   \u9474      
+\f1 \'a9\'c0
+\f0 \uc0\u9472  Npm.require("sockjs")                                60 ms (1)\
+I20180506-11:20:18.511(-5)? | \uc0\u9474   \u9474      
+\f1 \'a9\'c0
+\f0 \uc0\u9472  Npm.require("permessage-deflate")                     4 ms (1)\
+I20180506-11:20:18.511(-5)? | \uc0\u9474   \u9474      \u9492 \u9472  other require("/node_modules/meteor/ddp-server/server_convenience.js") 2 ms\
+I20180506-11:20:18.511(-5)? | \uc0\u9474   
+\f1 \'a9\'c0
+\f0 \uc0\u9472  packages/mongo.js...........................................4 ms (1)\
+I20180506-11:20:18.511(-5)? | \uc0\u9474   \u9474   \u9492 \u9472  require("/node_modules/meteor/mongo/mongo_driver.js")    1 ms (1)\
+I20180506-11:20:18.511(-5)? | \uc0\u9474   
+\f1 \'a9\'c0
+\f0 \uc0\u9472  packages/server-render.js.................................119 ms (1)\
+I20180506-11:20:18.512(-5)? | \uc0\u9474   \u9474   \u9492 \u9472  require("/node_modules/meteor/server-render/server.js").118 ms (1)\
+I20180506-11:20:18.512(-5)? | \uc0\u9474   \u9474      
+\f1 \'a9\'c0
+\f0 \uc0\u9472  require("./server-register.js").....................103 ms (1)\
+I20180506-11:20:18.512(-5)? | \uc0\u9474   \u9474      \u9474   
+\f1 \'a9\'c0
+\f0 \uc0\u9472  require("magic-string")                            4 ms (1)\
+I20180506-11:20:18.512(-5)? | \uc0\u9474   \u9474      \u9474   
+\f1 \'a9\'c0
+\f0 \uc0\u9472  require("parse5")                                 37 ms (1)\
+I20180506-11:20:18.512(-5)? | \uc0\u9474   \u9474      \u9474   \u9492 \u9472  require("combined-stream2")                       62 ms (1)\
+I20180506-11:20:18.513(-5)? | \uc0\u9474   \u9474      \u9492 \u9472  other require("/node_modules/meteor/server-render/server.js") 15 ms\
+I20180506-11:20:18.513(-5)? | \uc0\u9474   
+\f1 \'a9\'c0
+\f0 \uc0\u9472  packages/shell-server.js....................................7 ms (1)\
+I20180506-11:20:18.513(-5)? | \uc0\u9474   \u9474   \u9492 \u9472  require("/node_modules/meteor/shell-server/main.js").....7 ms (1)\
+I20180506-11:20:18.513(-5)? | \uc0\u9474   \u9474      
+\f1 \'a9\'c0
+\f0 \uc0\u9472  require("./shell-server.js")..........................4 ms (2)\
+I20180506-11:20:18.513(-5)? | \uc0\u9474   \u9474      \u9474   
+\f1 \'a9\'c0
+\f0 \uc0\u9472  require("repl")....................................2 ms (1)\
+I20180506-11:20:18.513(-5)? | \uc0\u9474   \u9474      \u9474   \u9474   \u9492 \u9472  Npm.require("repl")                             2 ms (1)\
+I20180506-11:20:18.513(-5)? | \uc0\u9474   \u9474      \u9474   \u9492 \u9472  other require("./shell-server.js")                 1 ms\
+I20180506-11:20:18.513(-5)? | \uc0\u9474   \u9474      \u9492 \u9472  other require("/node_modules/meteor/shell-server/main.js") 4 ms\
+I20180506-11:20:18.514(-5)? | \uc0\u9474   
+\f1 \'a9\'c0
+\f0 \uc0\u9472  packages/kadira_flow-router.js..............................5 ms (1)\
+I20180506-11:20:18.514(-5)? | \uc0\u9474   \u9474   \u9492 \u9472  require("/node_modules/meteor/kadira:flow-router/server/router.js").4 ms (1)\
+I20180506-11:20:18.514(-5)? | \uc0\u9474   \u9474      \u9492 \u9472  Npm.require("qs")                                     4 ms (1)\
+I20180506-11:20:18.514(-5)? | \uc0\u9474   
+\f1 \'a9\'c0
+\f0 \uc0\u9472  packages/htmljs.js                                          2 ms (1)\
+I20180506-11:20:18.514(-5)? | \uc0\u9474   
+\f1 \'a9\'c0
+\f0 \uc0\u9472  packages/johanbrook_publication-collector.js................1 ms (1)\
+I20180506-11:20:18.514(-5)? | \uc0\u9474   \u9474   \u9492 \u9472  require("/node_modules/meteor/johanbrook:publication-collector/publication-collector.js") 1 ms (1)\
+I20180506-11:20:18.514(-5)? | \uc0\u9474   
+\f1 \'a9\'c0
+\f0 \uc0\u9472  packages/autoupdate.js......................................7 ms (1)\
+I20180506-11:20:18.515(-5)? | \uc0\u9474   \u9474   \u9492 \u9472  require("/node_modules/meteor/autoupdate/autoupdate_server.js") 7 ms (1)\
+I20180506-11:20:18.515(-5)? | \uc0\u9474   
+\f1 \'a9\'c0
+\f0 \uc0\u9472  app/app.js.................................................29 ms (1)\
+I20180506-11:20:18.515(-5)? | \uc0\u9474   \u9474   \u9492 \u9472  require("/server/main.js")..............................29 ms (1)\
+I20180506-11:20:18.515(-5)? | \uc0\u9474   \u9474      \u9492 \u9472  require("/imports/startup/server")...................28 ms (1)\
+I20180506-11:20:18.515(-5)? | \uc0\u9474   \u9474         \u9492 \u9472  require("./fixtures.js")..........................28 ms (1)\
+I20180506-11:20:18.515(-5)? | \uc0\u9474   \u9474            
+\f1 \'a9\'c0
+\f0 \uc0\u9472  require("../../api/links/links.js")............27 ms (1)\
+I20180506-11:20:18.515(-5)? | \uc0\u9474   \u9474            \u9474   
+\f1 \'a9\'c0
+\f0 \uc0\u9472  Npm.require("mongodb-uri")                   2 ms (1)\
+I20180506-11:20:18.516(-5)? | \uc0\u9474   \u9474            \u9474   \u9492 \u9472  other require("../../api/links/links.js")   25 ms\
+I20180506-11:20:18.516(-5)? | \uc0\u9474   \u9474            \u9492 \u9472  other require("./fixtures.js")                  1 ms\
+I20180506-11:20:18.516(-5)? | \uc0\u9474   \u9492 \u9472  other Load server bundles                                  67 ms\
+I20180506-11:20:18.516(-5)? | 
+\f1 \'a9\'c0
+\f0 \uc0\u9472  Call Meteor.startup hooks......................................7 ms (1)\
+I20180506-11:20:18.516(-5)? | \uc0\u9474   
+\f1 \'a9\'c0
+\f0 \uc0\u9472  Meteor.startup at autoupdate_server.js (packages/autoupdate/autoupdate_server.js:160:8) 3 ms (1)\
+I20180506-11:20:18.516(-5)? | \uc0\u9474   \u9492 \u9472  Meteor.startup at fixtures.js (imports/startup/server/fixtures.js:6:8) 4 ms (1)\
+I20180506-11:20:18.517(-5)? | \uc0\u9492 \u9472  Run main()                                                     2 ms (1)\
+I20180506-11:20:18.517(-5)? | \
+I20180506-11:20:18.517(-5)? | Top leaves:\
+I20180506-11:20:18.524(-5)? | require("request").........................................163 ms (1)\
+I20180506-11:20:18.525(-5)? | require("combined-stream2")................................136 ms (2)\
+I20180506-11:20:18.525(-5)? | \
+I20180506-11:20:18.525(-5)? | (#1) Total: 814 ms (Server startup)\
+I20180506-11:20:18.526(-5)? | \
+=> Meteor server restarted\
+}
